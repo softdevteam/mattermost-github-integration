@@ -29,8 +29,24 @@ def root():
         process_issue_comment(data)
     elif event == "repository":
         process_repository(data)
+    elif event == "create":
+        process_create(data)
 
     return "Ok"
+
+def process_create(data):
+    ref_type = data['ref_type']
+    if ref_type == "branch":
+        branchname = data['ref']
+        reponame = data['repository']['full_name']
+        repourl = data['repository']['html_url']
+        username = data['sender']['login']
+        userurl = data['sender']['html_url']
+
+        msg = """#### [%s](%s) added branch `%s` to [%s](%s)""" % (username, userurl, branchname, reponame, repourl)
+        post_text(msg)
+
+
 
 def process_issue_comment(data):
     if data['action'] != "created":
