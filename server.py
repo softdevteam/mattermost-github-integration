@@ -7,11 +7,6 @@ import config
 
 app = Flask(__name__)
 
-USERNAME = "Github"
-ICON_URL = ""
-MATTERMOST_WEBHOOK_URL = ""
-CHANNEL = ""
-
 @app.route('/', methods=['POST'])
 def root():
     if request.json is None:
@@ -38,60 +33,48 @@ def process_create(data):
     ref_type = data['ref_type']
     if ref_type == "branch":
         branchname = data['ref']
-        reponame = data['repository']['full_name']
-        repourl = data['repository']['html_url']
-        username = data['sender']['login']
-        userurl = data['sender']['html_url']
+        user = create_user_link(data)
+        repo = create_repo_link(data)
 
-        msg = """#### [%s](%s) added branch `%s` to [%s](%s)""" % (username, userurl, branchname, reponame, repourl)
+        msg = """#### %s added branch `%s` to %s""" % (user, branchname, repo)
         post_text(msg)
-
-
 
 def process_issue_comment(data):
     if data['action'] != "created":
         return
 
-    username = data['comment']['user']['login']
-    userurl = data['comment']['user']['html_url']
-    useravatar = data['comment']['user']['avatar_url']
+    user = create_user_link(data)
     number = data['issue']['number']
     url = data['issue']['html_url']
     title = data['issue']['title']
     body = data['comment']['body']
-    reponame = data['repository']['full_name']
-    repourl = data['repository']['html_url']
-    msg = """#### [%s](%s) commented on [%s](%s)
-%s""" % (username, userurl, title, url, body)
+    msg = """#### %s commented on [%s](%s)
+%s""" % (user, title, url, body)
     post_text(msg)
 
 def process_issues(data):
     if data['action'] != "opened":
         return
 
-    username = data['issue']['user']['login']
-    userurl = data['issue']['user']['html_url']
+    user = create_user_link(data)
+    repo = create_repo_link(data)
     number = data['issue']['number']
     url = data['issue']['html_url']
     title = data['issue']['title']
     body = data['issue']['body']
-    reponame = data['repository']['name']
-    repourl = data['repository']['html_url']
-    msg = """#### New issue: #%s - [%s](%s)
-%s *Issue created by [%s](%s) in [%s](%s).*""" % (number, title, url, body, username, userurl, reponame, repourl)
+    msg = """#### New issue: #%s [%s](%s)
+%s *Issue created by %s in %s.*""" % (number, title, url, body, user, repo)
     post_text(msg)
 
 def process_repository(data):
     if data['action'] != "created":
         return
 
-    username = data['sender']['login']
-    userurl = data['sender']['html_url']
-    reponame = data['repository']['full_name']
-    repourl = data['repository']['html_url']
+    user = create_user_link(data)
+    repo = create_repo_link(data)
     repodescr = data['repository']['description']
-    msg = """#### New repository: [%s](%s)
-%s _Created by [%s](%s)._""" % (reponame, repourl, repodescr, username, userurl)
+    msg = """#### New repository: %s
+%s _Created by %s._""" % (repo, repodescr, user)
     post_text(msg)
 
 def process_prs(data):
@@ -99,15 +82,13 @@ def process_prs(data):
     if data['action'] != "opened":
         return
 
-    username = data['pull_request']['user']['login']
-    userurl = data['pull_request']['user']['html_url']
+    user = create_user_link(data)
+    repo = create_repo_link(data)
     number = data['pull_request']['number']
     url = data['pull_request']['html_url']
     title = data['pull_request']['title']
-    reponame = data['pull_request']['head']['repo']['name']
-    repourl = data['pull_request']['head']['repo']['html_url']
-    msg = """#### #%s - [%s](%s)
-_Pull request created by [%s](%s) in [%s](%s)._""" % (number, title, url, username, userurl, reponame, repourl)
+    msg = """#### New pull request: #%s [%s](%s)
+_Pull request created by %s in %s._""" % (number, title, url, user, repo)
     post_text(msg)
 
 def post_text(text):
@@ -122,6 +103,16 @@ def post_text(text):
 
     if r.status_code is not requests.codes.ok:
         print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (config.MATTERMOST_WEBHOOK_URL, r.status_code, r.json())
+
+def create_repo_link(data):
+    full_name = data['repository']['full_name']
+    url = data['repository']['html_url']
+    return "[%s](%s)" % (full_name, url)
+
+def create_user_link(data):
+    username = data['sender']['login']
+    url = data['sender']['html_url']
+    return "[%s](%s)" % (username, url)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
