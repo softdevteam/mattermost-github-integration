@@ -3,6 +3,7 @@ import requests
 from flask import Flask
 from flask import request
 import json
+import config
 
 app = Flask(__name__)
 
@@ -96,15 +97,15 @@ _Pull request created by [%s](%s) in [%s](%s)._""" % (number, title, url, userna
 def post_text(text):
     data = {}
     data['text'] = text
-    data['channel'] = CHANNEL
-    data['username'] = USERNAME
-    data['icon_url'] = ICON_URL
+    data['channel'] = config.CHANNEL
+    data['username'] = config.USERNAME
+    data['icon_url'] = config.ICON_URL
 
     headers = {'Content-Type': 'application/json'}
-    r = requests.post(MATTERMOST_WEBHOOK_URL, headers=headers, data=json.dumps(data), verify=False)
+    r = requests.post(config.MATTERMOST_WEBHOOK_URL, headers=headers, data=json.dumps(data), verify=False)
 
     if r.status_code is not requests.codes.ok:
-        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (MATTERMOST_WEBHOOK_URL, r.status_code, r.json())
+        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (config.MATTERMOST_WEBHOOK_URL, r.status_code, r.json())
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

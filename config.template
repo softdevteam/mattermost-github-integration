@@ -1,0 +1,4 @@
+USERNAME = "Github"
+ICON_URL = ""
+MATTERMOST_WEBHOOK_URL = ""
+CHANNEL = ""
