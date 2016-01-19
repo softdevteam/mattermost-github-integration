@@ -78,18 +78,24 @@ def process_repository(data):
     post_text(msg)
 
 def process_prs(data):
-    # only process new PRs for now
-    if data['action'] != "opened":
-        return
-
-    user = create_user_link(data)
-    repo = create_repo_link(data)
-    number = data['pull_request']['number']
-    url = data['pull_request']['html_url']
-    title = data['pull_request']['title']
-    msg = """#### New pull request: #%s [%s](%s)
+    if data['action'] == "opened":
+        user = create_user_link(data)
+        repo = create_repo_link(data)
+        number = data['pull_request']['number']
+        url = data['pull_request']['html_url']
+        title = data['pull_request']['title']
+        msg = """#### New pull request: #%s [%s](%s)
 _Pull request created by %s in %s._""" % (number, title, url, user, repo)
-    post_text(msg)
+        post_text(msg)
+    elif data['action'] == "closed":
+        user = create_user_link(data)
+        repo = create_repo_link(data)
+        number = data['pull_request']['number']
+        url = data['pull_request']['html_url']
+        title = data['pull_request']['title']
+        msg = """#### Closed pull request: #%s [%s](%s)
+_Pull request closed by %s in %s._""" % (number, title, url, user, repo)
+        post_text(msg)
 
 def post_text(text):
     data = {}
