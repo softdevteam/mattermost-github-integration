@@ -26,8 +26,11 @@ def root():
         process_repository(data)
     elif event == "create":
         process_create(data)
+    elif event == "pull_request_review_comment":
+        process_pr_comment(data)
 
     return "Ok"
+
 
 def process_create(data):
     ref_type = data['ref_type']
@@ -44,12 +47,12 @@ def process_issue_comment(data):
         return
 
     user = create_user_link(data)
-    number = data['issue']['number']
-    url = data['issue']['html_url']
-    title = data['issue']['title']
     body = data['comment']['body']
-    msg = """#### %s commented on [%s](%s)
-%s""" % (user, title, url, body)
+    url = data['comment']['html_url']
+    number = data['issue']['number']
+    title = data['issue']['title']
+    msg = """%s commented on [%s](%s):
+> %s""" % (user, title, url, body)
     post_text(msg)
 
 def process_issues(data):
@@ -61,9 +64,13 @@ def process_issues(data):
     number = data['issue']['number']
     url = data['issue']['html_url']
     title = data['issue']['title']
-    body = data['issue']['body']
+    body = data['issue']['body'][:200]
+    if len(body) < len(data['issue']['body']):
+        body += " [...]"
     msg = """#### New issue: #%s [%s](%s)
-%s *Issue created by %s in %s.*""" % (number, title, url, body, user, repo)
+> %s
+
+*Issue created by %s in %s.*""" % (number, title, url, body, user, repo)
     post_text(msg)
 
 def process_repository(data):
@@ -84,17 +91,37 @@ def process_prs(data):
         number = data['pull_request']['number']
         url = data['pull_request']['html_url']
         title = data['pull_request']['title']
-        msg = """#### New pull request: #%s [%s](%s)
-_Pull request created by %s in %s._""" % (number, title, url, user, repo)
+        body = data['pull_request']['body'][:200]
+        if len(body) < len(data['pull_request']['body']):
+            body += " [...]"
+        msg = """#### New pull request: [#%s %s](%s)
+> %s
+
+*Pull request created by %s in %s.*""" % (number, title, url, body, user, repo)
         post_text(msg)
     elif data['action'] == "closed":
         user = create_user_link(data)
         repo = create_repo_link(data)
+        merged = data['pull_request']['merged']
         number = data['pull_request']['number']
         url = data['pull_request']['html_url']
         title = data['pull_request']['title']
-        msg = """#### Closed pull request: #%s [%s](%s)
-_Pull request closed by %s in %s._""" % (number, title, url, user, repo)
+        if merged:
+            msg = """%s merged pull request [#%s %s](%s).""" % (user, number, title, url)
+        else:
+            msg = """%s closed pull request [#%s %s](%s).""" % (user, number, title, url)
+        post_text(msg)
+
+def process_pr_comment(data):
+    if data['action'] == "created":
+        user = create_user_link(data)
+        repo = create_repo_link(data)
+        body = data['comment']['body']
+        url = data['comment']['html_url']
+        number = data['pull_request']['number']
+        title = data['pull_request']['title']
+        msg = """%s commented on pull request [#%s %s](%s):
+> %s""" % (user, number, title, url, body)
         post_text(msg)
 
 def post_text(text):
