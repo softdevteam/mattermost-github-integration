@@ -39,7 +39,7 @@ def process_create(data):
         user = create_user_link(data)
         repo = create_repo_link(data)
 
-        msg = """#### %s added branch `%s` to %s""" % (user, branchname, repo)
+        msg = """%s added branch `%s` to %s.""" % (user, branchname, repo)
         post_text(msg)
 
 def process_issue_comment(data):
@@ -70,7 +70,7 @@ def process_issues(data):
     msg = """#### New issue: #%s [%s](%s)
 > %s
 
-*Issue created by %s in %s.*""" % (number, title, url, body, user, repo)
+*Created by %s in %s.*""" % (number, title, url, body, user, repo)
     post_text(msg)
 
 def process_repository(data):
@@ -81,7 +81,9 @@ def process_repository(data):
     repo = create_repo_link(data)
     repodescr = data['repository']['description']
     msg = """#### New repository: %s
-%s _Created by %s._""" % (repo, repodescr, user)
+> %s
+
+*Created by %s.*""" % (repo, repodescr, user)
     post_text(msg)
 
 def process_prs(data):
@@ -97,7 +99,7 @@ def process_prs(data):
         msg = """#### New pull request: [#%s %s](%s)
 > %s
 
-*Pull request created by %s in %s.*""" % (number, title, url, body, user, repo)
+*Created by %s in %s.*""" % (number, title, url, body, user, repo)
         post_text(msg)
     elif data['action'] == "closed":
         user = create_user_link(data)
