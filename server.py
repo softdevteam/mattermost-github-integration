@@ -147,7 +147,8 @@ def create_repo_link(data):
 def create_user_link(data):
     username = data['sender']['login']
     url = data['sender']['html_url']
-    return "[%s](%s)" % (username, url)
+    avatar = data['sender']['avatar_url'] + "&s=18"
+    return "![](%s) [%s](%s)" % (avatar, username, url)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
