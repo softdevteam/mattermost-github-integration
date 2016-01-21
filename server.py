@@ -23,6 +23,8 @@ def root():
             post(PullRequest(data).opened())
         elif data['action'] == "closed":
             post(PullRequest(data).closed())
+        elif data['action'] == "assigned":
+            post(PullRequest(data).assigned())
     elif event == "issues":
         if data['action'] == "opened":
             post(Issue(data).opened())

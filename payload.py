@@ -6,6 +6,9 @@ class Payload(object):
         name   = self.data['sender']['login']
         url    = self.data['sender']['html_url']
         avatar = self.data['sender']['avatar_url'] + "&s=18"
+        return self.create_user_link(name, url, avatar)
+
+    def create_user_link(self, name, url, avatar):
         return "![](%s) [%s](%s)" % (avatar, name, url)
 
     def repo_link(self):
@@ -39,6 +42,15 @@ class PullRequest(Payload):
 
 *Created by %s in %s.*""" % (self.number, self.title,
             self.url, body, self.user_link(), self.repo_link())
+        return msg
+
+    def assigned(self):
+        to_name   = self.data['assignee']['login']
+        to_url    = self.data['assignee']['html_url']
+        to_avatar = self.data['assignee']['avatar_url'] + "&s=18"
+        to = self.create_user_link(to_name, to_url, to_avatar)
+        msg = """%s assigned %s to pull request [#%s %s](%s).""" % (self.user_link(),
+            to, self.number, self.title, self.url)
         return msg
 
     def closed(self):
