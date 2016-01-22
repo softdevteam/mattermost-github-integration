@@ -1,6 +1,7 @@
 # Github integration for Mattermost
 
-![](http://diekmann.co.uk/stuff/mattergitpreview.png)
+Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermost-integration-gitlab) this program creates a server using [flask](https://github.com/mitsuhiko/flask) that listens for incoming GitHub event webhooks. These are then processed, formatted, and eventually forwarded to Mattermost where they are displayed inside a specified channel.
+![](http://diekmann.co.uk/stuff/mattergitpreview2.png)
 
 ## Requirements
 - Python
