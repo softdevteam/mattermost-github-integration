@@ -1,5 +1,7 @@
 # Github integration for Mattermost
 
+![](http://diekmann.co.uk/stuff/mattergitpreview.png)
+
 ## Requirements
 - Python
 - Flask (install with `pip install flask`)
