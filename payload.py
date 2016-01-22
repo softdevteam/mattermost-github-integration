@@ -37,11 +37,9 @@ class PullRequest(Payload):
 
     def opened(self):
         body = self.preview(self.body)
-        msg = """#### New pull request: [#%s %s](%s)
-> %s
-
-*Created by %s in %s.*""" % (self.number, self.title,
-            self.url, body, self.user_link(), self.repo_link())
+        msg = """%s opened new pull request [#%s %s](%s) in %s:
+> %s""" % (self.user_link(), self.number, self.title,
+            self.url, self.repo_link(), body)
         return msg
 
     def assigned(self):
@@ -84,11 +82,8 @@ class Issue(Payload):
 
     def opened(self):
         body = self.preview(self.body)
-        msg = """#### New issue: #%s [%s](%s)
-> %s
-
-*Created by %s in %s.*""" % (self.number, self.title,
-            self.url, body, self.user_link(), self.repo_link())
+        msg = """%s opened new issue [#%s %s](%s) in %s:
+> %s""" % (self.user_link(), self.number, self.title, self.url, self.repo_link(), body)
         return msg
 
 class IssueComment(Payload):
@@ -101,7 +96,7 @@ class IssueComment(Payload):
 
     def created(self):
         body = self.preview(self.body)
-        msg = """%s commented on [%s %s](%s):
+        msg = """%s commented on [#%s %s](%s):
 > %s""" % (self.user_link(), self.number, self.title, self.url, body)
         return msg
 
@@ -111,10 +106,8 @@ class Repository(Payload):
 
     def created(self):
         descr = self.data['repository']['description']
-        msg = """#### New repository: %s
-> %s
-
-*Created by %s.*""" % (self.repo_link(), descr, self.user_link())
+        msg = """%s created new repository %s:
+> %s""" % (self.user_link(), self.repo_link(), descr)
         return msg
 
 class Branch(Payload):
