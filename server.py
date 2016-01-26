@@ -5,7 +5,7 @@ from flask import request
 import json
 import config
 
-from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch
+from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push
 
 app = Flask(__name__)
 
@@ -42,6 +42,9 @@ def root():
     elif event == "pull_request_review_comment":
         if data['action'] == "created":
             post(PullRequestComment(data).created())
+    elif event == "push":
+        if not (data['deleted'] and data['forced']):
+            post(Push(data).commits())
 
     return "Ok"
 

@@ -119,3 +119,21 @@ class Branch(Payload):
         msg = """%s added branch `%s` to %s.""" % (self.user_link(),
             self.name, self.repo_link())
         return msg
+
+class Push(Payload):
+    def __init__(self, data):
+        Payload.__init__(self, data)
+
+    def commits(self):
+        commits = self.data['commits']
+        changeset = "changesets" if len(commits) > 1 else "changeset"
+        msg = []
+        msg.append("%s pushed %s %s to %s:" % (self.user_link(), len(commits), changeset, self.repo_link()))
+        for commit in commits:
+            cid  = commit['id'][:7]
+            curl = commit['url']
+            cmsg = self.preview(commit['message'])
+            ctext = "- [%s](%s): %s" % (cid, curl, cmsg)
+            msg.append("\n")
+            msg.append(ctext)
+        return "".join(msg)
