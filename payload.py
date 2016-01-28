@@ -86,6 +86,10 @@ class Issue(Payload):
 > %s""" % (self.user_link(), self.number, self.title, self.url, self.repo_link(), body)
         return msg
 
+    def closed(self):
+        msg = """%s closed issue [#%s %s](%s) in %s.""" % (self.user_link(), self.number, self.title, self.url, self.repo_link())
+        return msg
+
 class IssueComment(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)
