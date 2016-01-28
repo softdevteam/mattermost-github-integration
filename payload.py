@@ -133,7 +133,7 @@ class Push(Payload):
             cid  = commit['id'][:7]
             curl = commit['url']
             cmsg = self.preview(commit['message'])
-            ctext = "- [%s](%s): %s" % (cid, curl, cmsg)
+            ctext = "- [`%s`](%s): %s" % (cid, curl, cmsg)
             msg.append("\n")
             msg.append(ctext)
         return "".join(msg)

@@ -13,7 +13,7 @@ Copy `config.template` to `config.py` and edit it with your details. For example
 ```
 USERNAME = "Github"
 ICON_URL = "yourdomain.org/github.png"
-MATTERMOST_WEBHOOK_URL = "yourmain.org/hooks/hookid"
+MATTERMOST_WEBHOOK_URL = "yourdomain.org/hooks/hookid"
 CHANNEL = "off-topic"
 ```
 
