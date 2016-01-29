@@ -18,48 +18,64 @@ def root():
     data = request.json
     event = request.headers['X-Github-Event']
 
+    msg = ""
     if event == "pull_request":
         if data['action'] == "opened":
-            post(PullRequest(data).opened())
+            msg = PullRequest(data).opened()
         elif data['action'] == "closed":
-            post(PullRequest(data).closed())
+            msg = PullRequest(data).closed()
         elif data['action'] == "assigned":
-            post(PullRequest(data).assigned())
+            msg = PullRequest(data).assigned()
     elif event == "issues":
         if data['action'] == "opened":
-            post(Issue(data).opened())
+            msg = Issue(data).opened()
         elif data['action'] == "closed":
-            post(Issue(data).closed())
+            msg = Issue(data).closed()
     elif event == "issue_comment":
         if data['action'] == "created":
-            post(IssueComment(data).created())
+            msg = IssueComment(data).created()
     elif event == "repository":
         if data['action'] == "created":
-            post(Repository(data).created())
+            msg = Repository(data).created()
     elif event == "create":
         if data['ref_type'] == "branch":
-            post(Branch(data).created())
+            msg = Branch(data).created()
     elif event == "pull_request_review_comment":
         if data['action'] == "created":
-            post(PullRequestComment(data).created())
+            msg = PullRequestComment(data).created()
     elif event == "push":
         if not (data['deleted'] and data['forced']):
-            post(Push(data).commits())
+            msg = Push(data).commits()
+
+    if msg:
+        url, channel = get_hook_info(data)
+        post(msg, url, channel)
 
     return "Ok"
 
-def post(text):
+def post(text, url, channel):
     data = {}
     data['text'] = text
-    data['channel'] = config.CHANNEL
+    data['channel'] = channel
     data['username'] = config.USERNAME
     data['icon_url'] = config.ICON_URL
 
     headers = {'Content-Type': 'application/json'}
-    r = requests.post(config.MATTERMOST_WEBHOOK_URL, headers=headers, data=json.dumps(data), verify=False)
+    r = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
 
     if r.status_code is not requests.codes.ok:
         print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (config.MATTERMOST_WEBHOOK_URL, r.status_code, r.json())
+
+def get_hook_info(data):
+    if 'repository' in data:
+        repo = data['repository']['full_name']
+        if repo in config.MATTERMOST_WEBHOOK_URLS:
+            return config.MATTERMOST_WEBHOOK_URLS[repo]
+    if 'organization' in data:
+        org = data['organization']['login']
+        if org in config.MATTERMOST_WEBHOOK_URLS:
+            return config.MATTERMOST_WEBHOOK_URLS[org]
+    return config.MATTERMOST_WEBHOOK_URLS['default']
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

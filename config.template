@@ -1,4 +1,5 @@
 USERNAME = "Github"
 ICON_URL = ""
-MATTERMOST_WEBHOOK_URL = ""
-CHANNEL = ""
+MATTERMOST_WEBHOOK_URLS = {
+    'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
+}
