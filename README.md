@@ -6,6 +6,7 @@ Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermos
 ## Requirements
 - Python
 - Flask (install with `pip install flask`)
+- requests (install with `pip install requests`)
 
 ## Usage
 Copy `config.template` to `config.py` and edit it with your details. For example:
