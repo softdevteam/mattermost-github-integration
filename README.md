@@ -1,22 +1,31 @@
-# Github integration for Mattermost
 
-Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermost-integration-gitlab) this program creates a server using [flask](https://github.com/mitsuhiko/flask) that listens for incoming GitHub event webhooks. These are then processed, formatted, and eventually forwarded to Mattermost where they are displayed inside a specified channel.
-![](preview.png)
+## Work in progress. The following does not work (yet).
 
-## Requirements
-- Python
-- Flask (install with `pip install flask`)
-
-## Usage
-Copy `config.template` to `config.py` and edit it with your details. For example:
+# Installation
 
 ```
-USERNAME = "Github"
-ICON_URL = "yourdomain.org/github.png"
-MATTERMOST_WEBHOOK_URL = "yourdomain.org/hooks/hookid"
-CHANNEL = "off-topic"
+pip install mm_github 
 ```
 
-The server is listening by default on port 5000. Make sure to point your Github webhooks to `http://yourdomain.org:5000`.
+This also installs ``Flask`` and ``Matterhorn``.
 
-Start the server with `python server.py`.
+# Usage
+
+Standalone
+
+```
+from matterhorn import Matterhorn
+
+# app is a normal Flask app
+app = Matterhorn(__name__)
+
+app.add_plugin(
+    name='github',
+    url_prefix='/',
+    plugin='mm_github.github',
+    url=yourdomain.org/hooks/hookid
+)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
