@@ -9,6 +9,19 @@ from payload import PullRequest, PullRequestComment, Issue, IssueComment, Reposi
 
 app = Flask(__name__)
 
+event_map = {
+    'pull_request': PullRequest,
+    'issues': Issue,
+    'issue_comment': IssueComment,
+    'repository': Repository,
+    'pull_request_review_comment': PullRequestComment,
+
+    # these are handeled separetly
+    # 'create': Branch,
+    # 'push': Push,
+
+}
+
 @app.route('/', methods=['POST'])
 def root():
     if request.json is None:
@@ -18,33 +31,22 @@ def root():
     data = request.json
     event = request.headers['X-Github-Event']
 
-    if event == "pull_request":
-        if data['action'] == "opened":
-            post(PullRequest(data).opened())
-        elif data['action'] == "closed":
-            post(PullRequest(data).closed())
-        elif data['action'] == "assigned":
-            post(PullRequest(data).assigned())
-    elif event == "issues":
-        if data['action'] == "opened":
-            post(Issue(data).opened())
-        elif data['action'] == "closed":
-            post(Issue(data).closed())
-    elif event == "issue_comment":
-        if data['action'] == "created":
-            post(IssueComment(data).created())
-    elif event == "repository":
-        if data['action'] == "created":
-            post(Repository(data).created())
+    action_class = event_map.get(event, None)
+
+    if action_class is not None:
+        instance = action_class(data)
+        response = instance.dispatch()
+        if response is not None:
+            post(response)
+    
     elif event == "create":
+        branch = Branch(data)
         if data['ref_type'] == "branch":
-            post(Branch(data).created())
-    elif event == "pull_request_review_comment":
-        if data['action'] == "created":
-            post(PullRequestComment(data).created())
+            post(branch.created)
+    
     elif event == "push":
-        if not (data['deleted'] and data['forced']):
-            post(Push(data).commits())
+        if not data['deleted'] or not data['forced']:
+            post(Push(data).commits)
 
     return "Ok"
 
