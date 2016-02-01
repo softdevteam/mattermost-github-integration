@@ -64,7 +64,7 @@ def post(text, url, channel):
     r = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
 
     if r.status_code is not requests.codes.ok:
-        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (config.MATTERMOST_WEBHOOK_URL, r.status_code, r.json())
+        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (url, r.status_code, r.json())
 
 def get_hook_info(data):
     if 'repository' in data:
