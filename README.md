@@ -19,6 +19,7 @@ MATTERMOST_WEBHOOK_URLS = {
     'teamname/repositoryname' : ("yourdomain.org/hooks/hookid2", "repochannel"),
     'teamname' : ("yourdomain.org/hooks/hookid3", "town-square")
 }
+SECRET = 'secretkey'
 ```
 
 GitHub messages can be delegated to different Mattermost hooks. The
@@ -30,3 +31,5 @@ The server is listening by default on port 5000. Make sure to point your Github
 webhooks to `http://yourdomain.org:5000`.
 
 Start the server with `python server.py`.
+
+If you don't want to use a secret set the field to `None`.

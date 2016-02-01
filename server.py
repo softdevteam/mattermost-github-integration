@@ -4,16 +4,28 @@ from flask import Flask
 from flask import request
 import json
 import config
+import hmac
+import hashlib
 
 from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push
 
 app = Flask(__name__)
+
+SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
 
 @app.route('/', methods=['POST'])
 def root():
     if request.json is None:
        print 'Invalid Content-Type'
        return 'Content-Type must be application/json and the request body must contain valid JSON', 400
+
+    if SECRET:
+        signature = request.headers.get('X-Hub-Signature', None)
+        sig2 = SECRET.copy()
+        sig2.update(request.data)
+
+        if signature is None or sig2.hexdigest() != signature.split('=')[1]:
+            return 'Invalid or missing X-Hub-Signature', 400
 
     data = request.json
     event = request.headers['X-Github-Event']
