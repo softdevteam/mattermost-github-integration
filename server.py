@@ -7,7 +7,7 @@ import config
 import hmac
 import hashlib
 
-from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push
+from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag
 
 app = Flask(__name__)
 
@@ -52,6 +52,8 @@ def root():
     elif event == "create":
         if data['ref_type'] == "branch":
             msg = Branch(data).created()
+        elif data['ref_type'] == "tag":
+            msg = Tag(data).created()
     elif event == "pull_request_review_comment":
         if data['action'] == "created":
             msg = PullRequestComment(data).created()

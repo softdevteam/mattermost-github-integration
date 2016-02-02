@@ -124,6 +124,16 @@ class Branch(Payload):
             self.name, self.repo_link())
         return msg
 
+class Tag(Payload):
+    def __init__(self, data):
+        Payload.__init__(self, data)
+        self.name = self.data['ref']
+
+    def created(self):
+        msg = """%s added tag `%s` to %s.""" % (self.user_link(),
+            self.name, self.repo_link())
+        return msg
+
 class Push(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)
