@@ -7,7 +7,7 @@ import config
 import hmac
 import hashlib
 
-from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag
+from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment
 
 app = Flask(__name__)
 
@@ -60,6 +60,9 @@ def root():
     elif event == "push":
         if not (data['deleted'] and data['forced']):
             msg = Push(data).commits()
+    elif event == "commit_comment":
+        if data['action'] == "created":
+            msg = CommitComment(data).created()
 
     if msg:
         url, channel = get_hook_info(data)

@@ -104,6 +104,19 @@ class IssueComment(Payload):
 > %s""" % (self.user_link(), self.number, self.title, self.url, body)
         return msg
 
+class CommitComment(Payload):
+    def __init__(self, data):
+        Payload.__init__(self, data)
+        self.cid    = self.data['comment']['commit_id'][:7]
+        self.url    = self.data['comment']['html_url']
+        self.body   = self.data['comment']['body']
+
+    def created(self):
+        body = self.preview(self.body)
+        msg = """%s commented on [%s](%s):
+> %s""" % (self.user_link(), self.cid, self.url, body)
+        return msg
+
 class Repository(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)
