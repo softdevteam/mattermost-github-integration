@@ -86,8 +86,21 @@ class Issue(Payload):
 > %s""" % (self.user_link(), self.number, self.title, self.url, self.repo_link(), body)
         return msg
 
+    def labeled(self):
+        label = self.data['label']['name']
+        msg = """%s added label `%s` to issue [#%s %s](%s) in %s.""" % (self.user_link(), label, self.number, self.title, self.url, self.repo_link())
+        return msg
+
     def closed(self):
         msg = """%s closed issue [#%s %s](%s) in %s.""" % (self.user_link(), self.number, self.title, self.url, self.repo_link())
+        return msg
+
+    def assigned(self):
+        name   = self.data['assignee']['login']
+        url    = self.data['assignee']['html_url']
+        avatar = self.data['assignee']['avatar_url'] + "&s=18"
+        assignee = self.create_user_link(name, url, avatar)
+        msg = """%s assigned %s to issue [#%s %s](%s) in %s.""" % (self.user_link(), assignee, self.number, self.title, self.url, self.repo_link())
         return msg
 
 class IssueComment(Payload):
@@ -134,6 +147,11 @@ class Branch(Payload):
 
     def created(self):
         msg = """%s added branch `%s` to %s.""" % (self.user_link(),
+            self.name, self.repo_link())
+        return msg
+
+    def deleted(self):
+        msg = """%s deleted branch `%s` in %s.""" % (self.user_link(),
             self.name, self.repo_link())
         return msg
 

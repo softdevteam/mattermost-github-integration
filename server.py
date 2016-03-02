@@ -43,6 +43,10 @@ def root():
             msg = Issue(data).opened()
         elif data['action'] == "closed":
             msg = Issue(data).closed()
+        elif data['action'] == "labeled":
+            msg = Issue(data).labeled()
+        elif data['action'] == "assigned":
+            msg = Issue(data).assigned()
     elif event == "issue_comment":
         if data['action'] == "created":
             msg = IssueComment(data).created()
@@ -54,6 +58,9 @@ def root():
             msg = Branch(data).created()
         elif data['ref_type'] == "tag":
             msg = Tag(data).created()
+    elif event == "delete":
+        if data['ref_type'] == "branch":
+            msg = Branch(data).deleted()
     elif event == "pull_request_review_comment":
         if data['action'] == "created":
             msg = PullRequestComment(data).created()
@@ -67,8 +74,9 @@ def root():
     if msg:
         url, channel = get_hook_info(data)
         post(msg, url, channel)
-
-    return "Ok"
+        return "Ok"
+    else:
+        return "Not implemented", 400
 
 def post(text, url, channel):
     data = {}
