@@ -171,11 +171,12 @@ class Push(Payload):
 
     def commits(self):
         commits = self.data['commits']
+        branch = self.data['ref'].replace("refs/heads/", "")
         if not commits:
             commits = [self.data['head_commit']]
         changeset = "changesets" if len(commits) > 1 else "changeset"
         msg = []
-        msg.append("%s pushed %s %s to %s:" % (self.user_link(), len(commits), changeset, self.repo_link()))
+        msg.append("%s pushed %s %s to __%s__ at %s:" % (self.user_link(), len(commits), changeset, branch, self.repo_link()))
         for commit in commits:
             cid  = commit['id'][:7]
             curl = commit['url']
