@@ -20,6 +20,7 @@ MATTERMOST_WEBHOOK_URLS = {
     'teamname' : ("yourdomain.org/hooks/hookid3", "town-square")
 }
 SECRET = 'secretkey'
+SHOW_AVATARS = True
 ```
 
 GitHub messages can be delegated to different Mattermost hooks. The

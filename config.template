@@ -4,3 +4,4 @@ MATTERMOST_WEBHOOK_URLS = {
     'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
 }
 SECRET = ""
+SHOW_AVATARS = True

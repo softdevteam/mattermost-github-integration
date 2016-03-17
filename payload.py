@@ -1,3 +1,5 @@
+from config import SHOW_AVATARS
+
 class Payload(object):
     def __init__(self, data):
         self.data = data
@@ -9,7 +11,9 @@ class Payload(object):
         return self.create_user_link(name, url, avatar)
 
     def create_user_link(self, name, url, avatar):
-        return "![](%s) [%s](%s)" % (avatar, name, url)
+        if SHOW_AVATARS:
+            return "![](%s) [%s](%s)" % (avatar, name, url)
+        return "[%s](%s)" % (name, url)
 
     def repo_link(self):
         name = self.data['repository']['full_name']
