@@ -66,7 +66,8 @@ def root():
             msg = PullRequestComment(data).created()
     elif event == "push":
         if not (data['deleted'] and data['forced']):
-            msg = Push(data).commits()
+            if not data['ref'].startswith("refs/tags/"):
+                msg = Push(data).commits()
     elif event == "commit_comment":
         if data['action'] == "created":
             msg = CommitComment(data).created()
