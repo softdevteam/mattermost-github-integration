@@ -16,7 +16,7 @@ USERNAME = "Github"
 ICON_URL = "yourdomain.org/github.png"
 MATTERMOST_WEBHOOK_URLS = {
     'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
-    'teamname/repositoryname' : ("yourdomain.org/hooks/hookid2", "repochannel"),
+    'teamname/repositoryname' : ("yourdomain.org/hooks/hookid2", "repository-channel-id"),
     'teamname' : ("yourdomain.org/hooks/hookid3", "town-square"),
     'teamname/unimportantrepo' : None,
 }
@@ -39,5 +39,5 @@ If you don't want to use a secret set the field to `None`.
 
 ## Known issues
 
-- Channel names need to use the spelling that is used in their URL, e.g. instead
+- Channel names need to use the spelling that is used in their URL (the channel ID), e.g. instead
 of `Town Square` it needs to be `town-square`.
