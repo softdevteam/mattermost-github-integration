@@ -73,9 +73,13 @@ def root():
             msg = CommitComment(data).created()
 
     if msg:
-        url, channel = get_hook_info(data)
-        post(msg, url, channel)
-        return "Ok"
+        hook_info = get_hook_info(data)
+        if hook_info:
+            url, channel = get_hook_info(data)
+            post(msg, url, channel)
+            return "Notification successfully posted to Mattermost"
+        else:
+            return "Notification ignored (repository is blacklisted)."
     else:
         return "Not implemented", 400
 

@@ -11,22 +11,24 @@ Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermos
 ## Usage
 Copy `config.template` to `config.py` and edit it with your details. For example:
 
-```
+```python
 USERNAME = "Github"
 ICON_URL = "yourdomain.org/github.png"
 MATTERMOST_WEBHOOK_URLS = {
     'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
     'teamname/repositoryname' : ("yourdomain.org/hooks/hookid2", "repochannel"),
-    'teamname' : ("yourdomain.org/hooks/hookid3", "town-square")
+    'teamname' : ("yourdomain.org/hooks/hookid3", "town-square"),
+    'teamname/unimportantrepo' : None,
 }
 SECRET = 'secretkey'
 SHOW_AVATARS = True
 ```
 
-GitHub messages can be delegated to different Mattermost hooks. The
-order is as follows: First try to find a hook for the repositories full name.
-If that fails, try to find a hook for the organisation name. Otherwise use the
-default hook.
+GitHub messages can be delegated to different Mattermost hooks. The order is as
+follows. First try to find a hook for the repositories full name.  If that
+fails, try to find a hook for the organisation name. Otherwise use the default
+hook. Repositories can be blacklisted by setting them to `None` instead of
+`(url, channel)`.
 
 The server is listening by default on port 5000. Make sure to point your Github
 webhooks to `http://yourdomain.org:5000`.
@@ -34,3 +36,8 @@ webhooks to `http://yourdomain.org:5000`.
 Start the server with `python server.py`.
 
 If you don't want to use a secret set the field to `None`.
+
+## Known issues
+
+- Channel names need to use the spelling that is used in their URL, e.g. instead
+of `Town Square` it needs to be `town-square`.
