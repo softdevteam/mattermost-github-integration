@@ -82,7 +82,10 @@ def root():
 def post(text, url, channel):
     data = {}
     data['text'] = text
-    data['channel'] = channel
+
+    if not channel.islower():
+        print "Warning: The channel %s is not lowercase" % (channel)
+    data['channel'] = channel.lower()
     data['username'] = config.USERNAME
     data['icon_url'] = config.ICON_URL
 
