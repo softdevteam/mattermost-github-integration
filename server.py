@@ -101,11 +101,16 @@ def get_hook_info(data):
         repo = data['repository']['full_name']
         if repo in config.MATTERMOST_WEBHOOK_URLS:
             return config.MATTERMOST_WEBHOOK_URLS[repo]
-    if 'organization' in data:
+    elif 'organization' in data:
         org = data['organization']['login']
         if org in config.MATTERMOST_WEBHOOK_URLS:
             return config.MATTERMOST_WEBHOOK_URLS[org]
-    return config.MATTERMOST_WEBHOOK_URLS['default']
+    elif 'repository' in data:
+        owner = data['repository']['owner']['login']
+        if owner in config.MATTERMOST_WEBHOOK_URLS:
+            return config.MATTERMOST_WEBHOOK_URLS[owner]
+    else:
+        return config.MATTERMOST_WEBHOOK_URLS['default']
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
