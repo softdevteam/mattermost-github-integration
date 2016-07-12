@@ -105,7 +105,17 @@ def get_hook_info(data):
         org = data['organization']['login']
         if org in config.MATTERMOST_WEBHOOK_URLS:
             return config.MATTERMOST_WEBHOOK_URLS[org]
+    if 'repository' in data:
+        if 'login' in data['repository']['owner']:
+            owner = data['repository']['owner']['login']
+            if owner in config.MATTERMOST_WEBHOOK_URLS:
+                return config.MATTERMOST_WEBHOOK_URLS[owner]
+        if 'name' in data['repository']['owner']:
+            owner = data['repository']['owner']['name']
+            if owner in config.MATTERMOST_WEBHOOK_URLS:
+                return config.MATTERMOST_WEBHOOK_URLS[owner]
     return config.MATTERMOST_WEBHOOK_URLS['default']
+
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
