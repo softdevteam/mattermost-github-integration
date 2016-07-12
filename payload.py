@@ -1,4 +1,9 @@
 from config import SHOW_AVATARS
+import urllib2
+try:
+    from PIL import Image
+except ImportError:
+    SHOW_AVATARS = False
 
 class Payload(object):
     def __init__(self, data):
@@ -10,10 +15,19 @@ class Payload(object):
         avatar = self.data['sender']['avatar_url'] + "&s=18"
         return self.create_user_link(name, url, avatar)
 
+    def check_avatar_size(self, url):
+        f = urllib2.urlopen(url)
+        img = Image.open(f)
+        f.close()
+        if img.size[0] <= 20 and img.size[1] <= 20:
+            return True
+        return False
+
     def create_user_link(self, name, url, avatar):
-        if SHOW_AVATARS:
+        if SHOW_AVATARS and self.check_avatar_size(avatar):
             return "![](%s) [%s](%s)" % (avatar, name, url)
         return "[%s](%s)" % (name, url)
+
 
     def repo_link(self):
         name = self.data['repository']['full_name']
