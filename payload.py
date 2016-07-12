@@ -10,10 +10,38 @@ class Payload(object):
         avatar = self.data['sender']['avatar_url'] + "&s=18"
         return self.create_user_link(name, url, avatar)
 
+    def isAvatarSmallEnough(self,uri):
+        # Try block checks if required modules are available and determines then if avatar size is small enough to show it.
+       try:
+            import urllib
+            from PIL import ImageFile
+            file = urllib.urlopen(uri)
+            size = file.headers.get("content-length")
+            if size: size = int(size)
+            p = ImageFile.Parser()
+            while 1:
+                data = file.read(1024)
+                if not data:
+                    break
+                p.feed(data)
+                if p.image:
+                    file.close()
+                    if p.image.size[0] < 65 and p.image.size[1] < 65:
+                        return True
+                    else:
+                        return False
+                    break
+            file.close()
+            return False
+        # If modules not available, avatars are never shown.
+       except ImportError:
+            return False
+
     def create_user_link(self, name, url, avatar):
-        if SHOW_AVATARS:
+        if SHOW_AVATARS and self.isAvatarSmallEnough(avatar):
             return "![](%s) [%s](%s)" % (avatar, name, url)
         return "[%s](%s)" % (name, url)
+
 
     def repo_link(self):
         name = self.data['repository']['full_name']
