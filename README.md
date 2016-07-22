@@ -37,6 +37,19 @@ Start the server with `python server.py`.
 
 If you don't want to use a secret set the field to `None`.
 
+## Supported Events
+
+Not all Github events are forwarded to Mattermost.  Currently supported events are:
+
+* Issue comment
+* Commit comment
+* Push
+* Issues (open, delete, etc)
+* Repository (open, delete, etc)
+* Create (branch, tag)
+
+All other events will throw a ```400 Not Implented```
+
 ## Known issues
 
 - Channel names need to use the spelling that is used in their URL (the channel ID), e.g. instead
