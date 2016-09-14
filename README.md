@@ -41,6 +41,7 @@ If you don't want to use a secret set the field to `None`.
 
 Not all Github events are forwarded to Mattermost. Currently supported events are:
 
+* Ping, when you first added Github webhook
 * Commit pushes and comments
 * Issues (open, close, comment)
 * Pull Requests (create, merge, remove, comment)

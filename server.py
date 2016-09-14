@@ -31,7 +31,9 @@ def root():
     event = request.headers['X-Github-Event']
 
     msg = ""
-    if event == "pull_request":
+    if event == "ping":
+        msg = "ping from %s" % data['repository']['full_name']
+    elif event == "pull_request":
         if data['action'] == "opened":
             msg = PullRequest(data).opened()
         elif data['action'] == "closed":
