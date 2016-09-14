@@ -39,8 +39,8 @@ The server is listening by default on address `0.0.0.0`, port `5000`, and
 using `/` as base route.
 Make sure to point your Github webhooks to `http://yourdomain.org:5000/`.
 
-If you have proxy/load-balancer in front of your machine, and does not want to
-expose port 5000 to outside, change the `SERVER['hook']` value and redirect it
+If you have a proxy/load-balancer in front of your machine, and do not want to
+expose port 5000 to the outside, change the `SERVER['hook']` value and redirect it
 to this service.
 For example, if `SERVER['hook']` is `/hooks/github`, your Github webhooks
 would be `http://yourdomain.org/hooks/github`.
