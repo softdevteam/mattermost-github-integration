@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
 
-@app.route('/', methods=['POST'])
+@app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
     if request.json is None:
        print 'Invalid Content-Type'
@@ -118,5 +118,8 @@ def get_hook_info(data):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(
+        host=config.SERVER['address'] or "0.0.0.0"
+    ,   port=config.SERVER['port'] or 5000
+    ,   debug=False
+    )
