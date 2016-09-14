@@ -53,6 +53,7 @@ Start the server with `python server.py`.
 
 Not all Github events are forwarded to Mattermost. Currently supported events are:
 
+* Ping events (send when first adding the Github webhook)
 * Commit pushes and comments
 * Issues (open, close, comment)
 * Pull Requests (create, merge, remove, comment)
