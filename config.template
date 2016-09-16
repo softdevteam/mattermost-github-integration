@@ -1,7 +1,15 @@
 USERNAME = "Github"
-ICON_URL = ""
+ICON_URL = "yourdomain.org/github.png"
 MATTERMOST_WEBHOOK_URLS = {
     'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
+    'teamname/repositoryname' : ("yourdomain.org/hooks/hookid2", "repository-channel-id"),
+    'teamname' : ("yourdomain.org/hooks/hookid3", "town-square"),
+    'teamname/unimportantrepo' : None,
 }
-SECRET = ""
+SECRET = 'secretkey'
 SHOW_AVATARS = True
+SERVER = {
+    'hook': "/"
+,   'address': "0.0.0.0"
+,   'port': 5000
+}
