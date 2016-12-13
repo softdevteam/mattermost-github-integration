@@ -203,7 +203,7 @@ class Wiki(Payload):
             page_name  = page['page_name']
             title = page['title']
             summary = page['summary']
-            url = "%s/_compare/%" % (page['html_url'], page['sha'])
+            url = "%s/_compare/%s" % (page['html_url'], page['sha'])
             action = page['action']
             if summary :
               ctext = "- %s [%s](%s)\n>%s" % (action, page_name, url,summary)
