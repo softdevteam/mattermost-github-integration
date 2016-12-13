@@ -49,6 +49,18 @@ If you don't want to use a secret set the field to `None`.
 
 Start the server with `python server.py`.
 
+### Deploying with Docker
+
+To deploy with Docker, make sure you have Docker installed and run:
+
+```
+docker build --rm=true -t mm-github .
+docker run --rm -v "$(pwd)":/home/app -w /home/app -p 5000:5000 -ti mm-github
+```
+
+If you want to run in background mode, change the option `--rm` for `-d`.
+
+
 ## Supported Events
 
 Not all Github events are forwarded to Mattermost. Currently supported events are:
@@ -66,3 +78,5 @@ All other events will report back to GitHub with `400 Not Implemented`.
 
 - Channel names need to use the spelling that is used in their URL (the channel ID), e.g. instead
 of `Town Square` it needs to be `town-square`.
+
+- If you set a custom username (as shown in the default config), make sure you also set **Enable webhooks and slash commands to override usernames** under **Custom Integrations** in the System Console to **True**. Otherwise the bots username will be that of the person that setup the Mattermost integretation.
