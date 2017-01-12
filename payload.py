@@ -204,3 +204,26 @@ class Push(Payload):
             msg.append("\n")
             msg.append(ctext)
         return "".join(msg)
+class Wiki(Payload):
+    def __init__(self, data):
+        Payload.__init__(self, data)
+
+    def updated(self):
+        pages = self.data['pages']
+
+        msg = []
+        msg.append("%s changes %s pages in Wiki at %s:" % (self.user_link(), len(pages), self.repo_link()))
+        for page in pages:
+            page_name  = page['page_name']
+            title = page['title']
+            summary = page['summary']
+            url = "%s/_compare/%s" % (page['html_url'], page['sha'])
+            action = page['action']
+            if summary :
+              ctext = "- %s [%s](%s)\n>%s" % (action, page_name, url,summary)
+            else :
+              ctext = "- %s [%s](%s)\n" % (action, page_name, url)
+            msg.append("\n")
+            msg.append(ctext)
+        return "".join(msg)
+
