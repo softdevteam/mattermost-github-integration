@@ -59,8 +59,10 @@ This image is available on [DockerHub](https://hub.docker.com/r/dynamictivity/ma
 To run this, use the following `docker-compose.yml` while adjusting the settings for your own requirements:
 
 ```yaml
+version: '2'
+services:
   mm-int:
-    build: .
+    image: dynamictivity/mattermost-integration-github
     environment:
       FLASK_DEBUG: 1
       MATTERMOST_WEBHOOK_URL: "https://mattermost.dynamictivity.com/hooks/xesfsu9pj3no8emqagi7yuo6jr"
