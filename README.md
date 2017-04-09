@@ -99,4 +99,4 @@ All other events will report back to GitHub with `400 Not Implemented`.
 - Channel names need to use the spelling that is used in their URL (the channel ID), e.g. instead
 of `Town Square` it needs to be `town-square`.
 
-- If you set a custom username (as shown in the default config), make sure you also set **Enable webhooks and slash commands to override usernames** under **Custom Integrations** in the System Console to **True**. Otherwise the bots username will be that of the person that setup the Mattermost integretation.
+- If you set a custom username (as shown in the default config), make sure you also set **Enable webhooks and slash commands to override usernames** under **Custom Integrations** in the System Console to **True**. Otherwise the bots username will be that of the person that setup the Mattermost integration.
