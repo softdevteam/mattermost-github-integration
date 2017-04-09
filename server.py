@@ -1,4 +1,3 @@
-import config
 import hashlib
 import hmac
 import json
@@ -7,6 +6,7 @@ import requests
 from flask import Flask
 from flask import request
 
+import config
 from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment, \
     Wiki
 
@@ -130,5 +130,4 @@ if __name__ == "__main__":
     app.run(
         host=config.SERVER['address'] or "0.0.0.0"
         , port=config.SERVER['port'] or 5000
-        , debug=False
     )
