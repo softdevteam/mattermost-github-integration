@@ -7,7 +7,8 @@ import requests
 from flask import Flask
 from flask import request
 
-from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment, Wiki
+from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment, \
+    Wiki
 
 app = Flask(__name__)
 
