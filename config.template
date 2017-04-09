@@ -1,7 +1,9 @@
+import os
+
 USERNAME = "Github"
 ICON_URL = ""
 MATTERMOST_WEBHOOK_URLS = {
-    'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
+    'default' : os.environ.get('MATTERMOST_WEBHOOK_URLS', '"yourdomain.org/hooks/hookid", "off-topic"'),
 }
 SECRET = ""
 SHOW_AVATARS = True
