@@ -1,23 +1,25 @@
-import os
+import hashlib
+import hmac
+import json
+
 import requests
 from flask import Flask
 from flask import request
-import json
-import config
-import hmac
-import hashlib
 
-from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment
+import config
+from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment, \
+    Wiki
 
 app = Flask(__name__)
 
 SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
 
+
 @app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
     if request.json is None:
-       print 'Invalid Content-Type'
-       return 'Content-Type must be application/json and the request body must contain valid JSON', 400
+        print 'Invalid Content-Type'
+        return 'Content-Type must be application/json and the request body must contain valid JSON', 400
 
     if SECRET:
         signature = request.headers.get('X-Hub-Signature', None)
@@ -73,6 +75,8 @@ def root():
     elif event == "commit_comment":
         if data['action'] == "created":
             msg = CommitComment(data).created()
+    elif event == "gollum":
+        msg = Wiki(data).updated()
 
     if msg:
         hook_info = get_hook_info(data)
@@ -85,6 +89,7 @@ def root():
     else:
         return "Not implemented", 400
 
+
 def post(text, url, channel):
     data = {}
     data['text'] = text
@@ -96,7 +101,9 @@ def post(text, url, channel):
     r = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
 
     if r.status_code is not requests.codes.ok:
-        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (url, r.status_code, r.json())
+        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (
+        url, r.status_code, r.json())
+
 
 def get_hook_info(data):
     if 'repository' in data:
@@ -122,6 +129,5 @@ def get_hook_info(data):
 if __name__ == "__main__":
     app.run(
         host=config.SERVER['address'] or "0.0.0.0"
-    ,   port=config.SERVER['port'] or 5000
-    ,   debug=False
+        , port=config.SERVER['port'] or 5000
     )

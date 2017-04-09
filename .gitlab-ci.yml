@@ -1,0 +1,50 @@
+stages:
+  - build
+  - deploy
+  - sync
+
+build:
+  stage: build
+  script:
+    - docker build -t ${CI_PROJECT_NAME}:${CI_BUILD_REF_NAME} .
+  tags:
+    - docker-build
+
+deploy:
+  stage: deploy
+  script:
+    - docker login --username=${DOCKER_CLOUD_USERNAME} --password=${DOCKER_CLOUD_PASSWORD}
+    - docker tag ${CI_PROJECT_NAME}:${CI_BUILD_REF_NAME} ${DOCKER_CLOUD_REPO}:${CI_BUILD_REF_NAME}
+    - docker push ${DOCKER_CLOUD_REPO}:${CI_BUILD_REF_NAME}
+  only:
+    - master
+    - dev
+    - tags
+  when: on_success
+  tags:
+    - docker-build
+
+tag_latest:
+  stage: deploy
+  script:
+    - docker login --username=${DOCKER_CLOUD_USERNAME} --password=${DOCKER_CLOUD_PASSWORD}
+    - docker tag ${CI_PROJECT_NAME}:${CI_BUILD_REF_NAME} ${DOCKER_CLOUD_REPO}:latest
+    - docker push ${DOCKER_CLOUD_REPO}:latest
+  only:
+    - master
+  when: on_success
+  tags:
+    - docker-build
+
+sync:
+  stage: sync
+  image: zaporylie/git
+  script:
+    - ssh-keyscan -H ${GIT_SYNC_REMOTE_HOST} >> ~/.ssh/known_hosts
+    - git remote rm sync || true
+    - git remote add sync ${GIT_SYNC_REMOTE_URL}
+    - git checkout ${CI_BUILD_REF_NAME}
+    - git pull origin ${CI_BUILD_REF_NAME}
+    - git push sync ${CI_BUILD_REF_NAME} --tags
+  tags:
+    - docker-build
