@@ -82,7 +82,7 @@ def root():
             ignore_actions = None
             try:
                 url, channel = get_hook_info(data)
-            expect ValueError:
+            except ValueError:
                 url, channel, ignore_actions = get_hook_info(data)
 
             if ignore_actions and data['action'] in ignore_actions:
