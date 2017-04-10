@@ -79,7 +79,15 @@ def root():
     if msg:
         hook_info = get_hook_info(data)
         if hook_info:
-            url, channel = get_hook_info(data)
+            ignore_actions = None
+            try:
+                url, channel = get_hook_info(data)
+            expect ValueError:
+                url, channel, ignore_actions = get_hook_info(data)
+
+            if ignore_actions and data['action'] in ignore_actions:
+                return "Notification action ignored (as per configuration)"
+
             post(msg, url, channel)
             return "Notification successfully posted to Mattermost"
         else:
