@@ -86,8 +86,8 @@ def root():
                 url, channel, ignore_actions = get_hook_info(data)
 
             if ignore_actions and \
-               data['event'] in ignore_actions and \
-               data['action'] in ignore_actions[data['event']]:
+               event in ignore_actions and \
+               data['action'] in ignore_actions[event]:
                 return "Notification action ignored (as per configuration)"
 
             post(msg, url, channel)
