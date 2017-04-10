@@ -1,4 +1,3 @@
-import os
 import requests
 from flask import Flask
 from flask import request
@@ -13,11 +12,12 @@ app = Flask(__name__)
 
 SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
 
+
 @app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
     if request.json is None:
-       print 'Invalid Content-Type'
-       return 'Content-Type must be application/json and the request body must contain valid JSON', 400
+        print 'Invalid Content-Type'
+        return 'Content-Type must be application/json and the request body must contain valid JSON', 400
 
     if SECRET:
         signature = request.headers.get('X-Hub-Signature', None)
@@ -87,6 +87,7 @@ def root():
     else:
         return "Not implemented", 400
 
+
 def post(text, url, channel):
     data = {}
     data['text'] = text
@@ -99,6 +100,7 @@ def post(text, url, channel):
 
     if r.status_code is not requests.codes.ok:
         print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (url, r.status_code, r.json())
+
 
 def get_hook_info(data):
     if 'repository' in data:
@@ -123,7 +125,7 @@ def get_hook_info(data):
 
 if __name__ == "__main__":
     app.run(
-        host=config.SERVER['address'] or "0.0.0.0"
-    ,   port=config.SERVER['port'] or 5000
-    ,   debug=False
+        host=config.SERVER['address'] or "0.0.0.0",
+        port=config.SERVER['port'] or 5000,
+        debug=False
     )
