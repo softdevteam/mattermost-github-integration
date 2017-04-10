@@ -3,6 +3,8 @@ ICON_URL = ""
 MATTERMOST_WEBHOOK_URLS = {
     'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
 }
+GITHUB_IGNORE_ACTIONS = {
+}
 SECRET = ""
 SHOW_AVATARS = True
 SERVER = {

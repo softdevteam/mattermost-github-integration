@@ -1,4 +1,3 @@
-import os
 import requests
 from flask import Flask
 from flask import request
@@ -16,8 +15,8 @@ SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else N
 @app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
     if request.json is None:
-       print 'Invalid Content-Type'
-       return 'Content-Type must be application/json and the request body must contain valid JSON', 400
+        print 'Invalid Content-Type'
+        return 'Content-Type must be application/json and the request body must contain valid JSON', 400
 
     if SECRET:
         signature = request.headers.get('X-Hub-Signature', None)
@@ -80,6 +79,12 @@ def root():
         hook_info = get_hook_info(data)
         if hook_info:
             url, channel = get_hook_info(data)
+
+            if hasattr(config, "GITHUB_IGNORE_ACTIONS") and \
+               event in config.GITHUB_IGNORE_ACTIONS and \
+               data['action'] in config.GITHUB_IGNORE_ACTIONS[event]:
+                return "Notification action ignored (as per configuration)"
+
             post(msg, url, channel)
             return "Notification successfully posted to Mattermost"
         else:
@@ -120,10 +125,9 @@ def get_hook_info(data):
                 return config.MATTERMOST_WEBHOOK_URLS[owner]
     return config.MATTERMOST_WEBHOOK_URLS['default']
 
-
 if __name__ == "__main__":
     app.run(
-        host=config.SERVER['address'] or "0.0.0.0"
-    ,   port=config.SERVER['port'] or 5000
-    ,   debug=False
+        host=config.SERVER['address'] or "0.0.0.0",
+        port=config.SERVER['port'] or 5000,
+        debug=False
     )
