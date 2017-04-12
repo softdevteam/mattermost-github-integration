@@ -21,6 +21,9 @@ MATTERMOST_WEBHOOK_URLS = {
     'teamname' : ("yourdomain.org/hooks/hookid3", "town-square"),
     'teamname/unimportantrepo' : None,
 }
+GITHUB_IGNORE_ACTIONS = {
+    "issues": ["label", "assign"],
+}
 SECRET = 'secretkey'
 SHOW_AVATARS = True
 SERVER = {
@@ -35,6 +38,11 @@ follows. First try to find a hook for the repositories full name.  If that
 fails, try to find a hook for the organisation name. Otherwise use the default
 hook. Repositories can be blacklisted by setting them to `None` instead of
 `(url, channel)`.
+
+Specific Github events can be ignored by using the optional
+`GITHUB_IGNORE_ACTIONS`. In the above example `label` and `assign` events for
+issue are ignored, while `open` and `close` events will continue to show
+up on Mattermost.
 
 The server is listening by default on address `0.0.0.0`, port `5000`, and
 using `/` as base route.
