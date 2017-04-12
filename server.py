@@ -79,15 +79,11 @@ def root():
     if msg:
         hook_info = get_hook_info(data)
         if hook_info:
-            ignore_actions = None
-            try:
-                url, channel = get_hook_info(data)
-            except ValueError:
-                url, channel, ignore_actions = get_hook_info(data)
+            url, channel = get_hook_info(data)
 
-            if ignore_actions and \
-               event in ignore_actions and \
-               data['action'] in ignore_actions[event]:
+            if config.GITHUB_IGNORE_ACTIONS and \
+               event in config.GITHUB_IGNORE_ACTIONS and \
+               data['action'] in config.GITHUB_IGNORE_ACTIONS[event]:
                 return "Notification action ignored (as per configuration)"
 
             post(msg, url, channel)
