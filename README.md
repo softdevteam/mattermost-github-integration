@@ -22,7 +22,7 @@ MATTERMOST_WEBHOOK_URLS = {
     'teamname/unimportantrepo' : None,
 }
 GITHUB_IGNORE_ACTIONS = {
-    "issues": ["label", "assign"],
+    "issues": ["labeled", "assigned"],
 }
 SECRET = 'secretkey'
 SHOW_AVATARS = True
@@ -33,17 +33,24 @@ SERVER = {
 }
 ```
 
+Start the server with `python server.py`.
+
+### Webhooks
 GitHub messages can be delegated to different Mattermost hooks. The order is as
-follows. First try to find a hook for the repositories full name.  If that
-fails, try to find a hook for the organisation name. Otherwise use the default
-hook. Repositories can be blacklisted by setting them to `None` instead of
+follows:
+- First try to find a hook for the repositories full name.
+- If that fails, try to find a hook for the organisation name.
+- Otherwise use the default hook.
+
+Repositories can be blacklisted by setting them to `None` instead of
 `(url, channel)`.
 
-Specific Github events can be ignored by using the optional
-`GITHUB_IGNORE_ACTIONS`. In the above example `label` and `assign` events for
-issue are ignored, while `open` and `close` events will continue to show
+### Ignore actions
+Specific Github events can be ignored by adding `GITHUB_IGNORE_ACTIONS` to `config.py`. In the example above `labeled` and `assigned` events for
+issues are ignored, while `opened`, `closed`, etc. events will continue to show
 up on Mattermost.
 
+### Server settings
 The server is listening by default on address `0.0.0.0`, port `5000`, and
 using `/` as base route.
 Make sure to point your Github webhooks to `http://yourdomain.org:5000/`.
@@ -54,11 +61,10 @@ to this service.
 For example, if `SERVER['hook']` is `/hooks/github`, your Github webhooks
 would be `http://yourdomain.org/hooks/github`.
 
+### Secret
 If you don't want to use a secret set the field to `None`.
 
-Start the server with `python server.py`.
-
-### Deploying with Docker
+## Deploying with Docker
 
 To deploy with Docker, make sure you have Docker installed and run:
 
@@ -68,7 +74,6 @@ docker run --rm -v "$(pwd)":/home/app -w /home/app -p 5000:5000 -ti mm-github
 ```
 
 If you want to run in background mode, change the option `--rm` for `-d`.
-
 
 ## Supported Events
 
