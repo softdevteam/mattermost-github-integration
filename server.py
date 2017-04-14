@@ -81,7 +81,7 @@ def root():
         if hook_info:
             url, channel = get_hook_info(data)
 
-            if config.GITHUB_IGNORE_ACTIONS and \
+            if hasattr(config, "GITHUB_IGNORE_ACTIONS") and \
                event in config.GITHUB_IGNORE_ACTIONS and \
                data['action'] in config.GITHUB_IGNORE_ACTIONS[event]:
                 return "Notification action ignored (as per configuration)"
@@ -127,7 +127,6 @@ def get_hook_info(data):
             if owner in config.MATTERMOST_WEBHOOK_URLS:
                 return config.MATTERMOST_WEBHOOK_URLS[owner]
     return config.MATTERMOST_WEBHOOK_URLS['default']
-
 
 if __name__ == "__main__":
     app.run(
