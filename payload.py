@@ -1,5 +1,5 @@
 from config import SHOW_AVATARS
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 try:
     from PIL import Image
 except ImportError:
@@ -16,7 +16,7 @@ class Payload(object):
         return self.create_user_link(name, url, avatar)
 
     def check_avatar_size(self, url):
-        f = urllib2.urlopen(url)
+        f = urllib.request.urlopen(url)
         img = Image.open(f)
         f.close()
         if img.size[0] <= 20 and img.size[1] <= 20:
