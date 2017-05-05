@@ -4,10 +4,12 @@ Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermos
 ![](preview.png)
 
 ## Requirements
-- Python
-- Flask (install with `pip install flask`)
-- requests (install with `pip install requests`)
-- (optional) PIL (install with `pip install pillow`) - needed to hide big Github avatars
+System requirements
+- Python 3
+
+Application requirements
+
+`pip install -r requirements.txt`
 
 ## Usage
 Copy `config.template` to `config.py` and edit it with your details. For example:
