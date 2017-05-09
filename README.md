@@ -35,7 +35,7 @@ SERVER = {
 }
 ```
 
-Start the server with `python server.py`.
+Start the server with `python mattermostgithub/server.py`.
 
 ### Webhooks
 GitHub messages can be delegated to different Mattermost hooks. The order is as
