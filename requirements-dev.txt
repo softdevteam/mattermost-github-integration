@@ -1,0 +1,14 @@
+-r requirements.txt
+
+ipdb==0.8.1
+ipython==4.0.0
+ipython-genutils==0.1.0
+
+# Testing
+pytest>=2.6
+pytest-cov>=1.8
+pytest-spec>=0.2
+pytest-sugar>=0.7.0
+codecov>=1.6
+tox>=1.7
+flake8>=2.2.5
