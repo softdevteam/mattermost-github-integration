@@ -15,7 +15,7 @@ SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else N
 @app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
     if request.json is None:
-        print 'Invalid Content-Type'
+        print('Invalid Content-Type')
         return 'Content-Type must be application/json and the request body must contain valid JSON', 400
 
     if SECRET:
@@ -103,7 +103,7 @@ def post(text, url, channel):
     r = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
 
     if r.status_code is not requests.codes.ok:
-        print 'Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (url, r.status_code, r.json())
+        print('Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (url, r.status_code, r.json()))
 
 def get_hook_info(data):
     if 'repository' in data:
