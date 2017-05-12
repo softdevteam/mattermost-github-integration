@@ -1,0 +1,10 @@
+language: python
+sudo: false
+python:
+  - 3.5
+install:
+  - pip install tox codecov
+script:
+  - tox
+after_success:
+  - codecov
