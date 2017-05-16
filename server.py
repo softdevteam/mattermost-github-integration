@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
 
+
 @app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
     if request.json is None:
@@ -92,6 +93,7 @@ def root():
     else:
         return "Not implemented", 400
 
+
 def post(text, url, channel):
     data = {}
     data['text'] = text
@@ -104,6 +106,7 @@ def post(text, url, channel):
 
     if r.status_code is not requests.codes.ok:
         print('Encountered error posting to Mattermost URL %s, status=%d, response_body=%s' % (url, r.status_code, r.json()))
+
 
 def get_hook_info(data):
     if 'repository' in data:
