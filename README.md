@@ -4,10 +4,16 @@ Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermos
 ![](preview.png)
 
 ## Requirements
-System requirements
-- Python 3
+### System requirements
+- Python2 or Python3
 
-Application requirements
+### Application requirements
+
+- Flask (install with `pip install flask`)
+- requests (install with `pip install requests`)
+- (optional) PIL (install with `pip install pillow`) - needed to hide big Github avatars
+
+All requirements can also be installed using the command
 
 `pip install -r requirements.txt`
 
