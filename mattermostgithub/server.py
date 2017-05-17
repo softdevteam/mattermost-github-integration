@@ -1,14 +1,16 @@
-import requests
-from flask import Flask
-from flask import request
 import json
-import config
 import hmac
 import hashlib
+import requests
+from flask import request
 
-from payload import PullRequest, PullRequestComment, Issue, IssueComment, Repository, Branch, Push, Tag, CommitComment, Wiki
+from mattermostgithub import config
+from mattermostgithub.payload import (
+    PullRequest, PullRequestComment, Issue, IssueComment,
+    Repository, Branch, Push, Tag, CommitComment, Wiki
+)
 
-app = Flask(__name__)
+from mattermostgithub import app
 
 SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
 
