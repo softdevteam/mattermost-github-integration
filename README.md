@@ -17,6 +17,14 @@ All requirements can also be installed using the command
 
 `pip install -r requirements.txt`
 
+## Installation
+
+The application can be installed from PyPI:
+
+```
+pip install mattermostgithub
+```
+
 ## Usage
 Copy `config.template` to `config.py` and edit it with your details. For example:
 
@@ -41,7 +49,13 @@ SERVER = {
 }
 ```
 
-Start the server with `python mattermostgithub/server.py`.
+Configure the environment variables and run the flask application:
+
+```
+export FLASK_APP=mattermostgithub
+export MGI_CONFIG_FILE=path/to/config.py
+flask run
+```
 
 ### Webhooks
 GitHub messages can be delegated to different Mattermost hooks. The order is as
