@@ -17,7 +17,7 @@ def read_relative_file(filename):
 setup(
     name='mattermost-github',
     version="0.1.0",
-    author='Software Development Team',
+    author='Mattermost Github Integration Developers',
     author_email='info@soft-dev.org',
     packages=["mattermostgithub"],
     include_package_data=True,
