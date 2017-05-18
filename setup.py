@@ -18,7 +18,6 @@ setup(
     name='mattermost-github',
     version="0.1.0",
     author='Mattermost Github Integration Developers',
-    author_email='info@soft-dev.org',
     packages=["mattermostgithub"],
     include_package_data=True,
     long_description=read_relative_file('README.md'),
