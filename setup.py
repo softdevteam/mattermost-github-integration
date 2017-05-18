@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from os.path import abspath
-from os.path import dirname
-from os.path import join
-from setuptools import find_packages
-from setuptools import setup
+from os.path import abspath, dirname, join
+from setuptools import find_packages, setup
 import codecs
 
 
@@ -19,7 +16,7 @@ def read_relative_file(filename):
 
 setup(
     name='mattermost-github',
-    version="1.0.0",
+    version="0.1.0",
     author='Software Development Team',
     author_email='info@soft-dev.org',
     packages=["mattermostgithub"],
@@ -30,19 +27,9 @@ setup(
     description='Integration between Mattermost and Github',
     zip_safe=False,
     install_requires=[
-        "appdirs==1.4.3",
-        "click==6.7",
-        "Flask==0.12.1",
-        "itsdangerous==0.24",
-        "Jinja2==2.9.6",
-        "MarkupSafe==1.0",
-        "olefile==0.44",
-        "packaging==16.8",
-        "Pillow==4.1.1",
-        "pyparsing==2.2.0",
-        "requests==2.13.0",
-        "six==1.10.0",
-        "Werkzeug==0.12.1",
+        "Flask>=0.12.1",
+        "Pillow>=4.1.1",
+        "requests>=2.13.0",
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

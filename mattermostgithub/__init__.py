@@ -3,9 +3,9 @@ import sys
 from flask import Flask
 app = Flask(__name__)
 
-if os.environ.get('MGI_CONFIG_FILE'):
-    module_name = "mattermostgithub.config"
-    file_path = os.environ.get('MGI_CONFIG_FILE')
+if 'MGI_CONFIG_FILE' in os.environ:
+    module_name = 'mattermostgithub.config'
+    file_path = os.environ['MGI_CONFIG_FILE']
     try:
         # python 3
         import importlib.util
@@ -13,7 +13,7 @@ if os.environ.get('MGI_CONFIG_FILE'):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         sys.modules[module_name] = module
-    except:
+    except ImportError:
         # python 2
         import imp
         config = imp.load_source('mattermostgithub.config', file_path)
