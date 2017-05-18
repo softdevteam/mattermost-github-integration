@@ -16,6 +16,6 @@ if 'MGI_CONFIG_FILE' in os.environ:
     except ImportError:
         # python 2
         import imp
-        config = imp.load_source('mattermostgithub.config', file_path)
+        config = imp.load_source(module_name, file_path)
 
 import mattermostgithub.server
