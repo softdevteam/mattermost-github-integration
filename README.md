@@ -19,7 +19,7 @@ All requirements can also be installed using the command
 
 ## Installation
 
-The application can be installed from PyPI:
+Either clone this repositry or install via PyPI:
 
 ```
 pip install mattermostgithub
@@ -49,7 +49,9 @@ SERVER = {
 }
 ```
 
-Configure the environment variables and run the flask application:
+Then start the server with `python server.py`.
+
+The project can also be run as a flask application:
 
 ```
 export FLASK_APP=mattermostgithub
