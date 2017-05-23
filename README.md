@@ -19,7 +19,7 @@ All requirements can also be installed using the command
 
 ## Installation
 
-Either clone this repositry or install via PyPI:
+Either clone this repositry or install via
 
 ```
 pip install git+https://github.com/softdevteam/mattermost-github-integration
