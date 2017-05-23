@@ -7,4 +7,4 @@ EXPOSE 5000
 
 COPY requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
-CMD python mattermostgithub/server.py
+CMD python server.py
