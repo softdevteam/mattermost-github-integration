@@ -22,7 +22,7 @@ All requirements can also be installed using the command
 Either clone this repositry or install via PyPI:
 
 ```
-pip install mattermostgithub
+pip install git+https://github.com/softdevteam/mattermost-github-integration
 ```
 
 ## Usage
