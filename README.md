@@ -26,7 +26,10 @@ pip install git+https://github.com/softdevteam/mattermost-github-integration
 ```
 
 ## Usage
-Copy `config.template` to `config.py` and edit it with your details. For example:
+
+### Method 1
+
+Within the `mattermostgithub` folder, copy `config.template` to `config.py` and edit it with your details. For example:
 
 ```python
 USERNAME = "Github"
@@ -49,9 +52,14 @@ SERVER = {
 }
 ```
 
-Then start the server with `python server.py`.
+Start the server with `python server.py`.
 
-The project can also be run as a flask application:
+### Method 2
+
+Download `config.template` and save it as `config.py` on your machine, changing
+your details as described above.
+
+The project can then be run as a flask application:
 
 ```
 export FLASK_APP=mattermostgithub
