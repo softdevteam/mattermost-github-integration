@@ -5,7 +5,7 @@ Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermos
 
 ## Requirements
 ### System requirements
-- Python2 or Python3
+- Python3 or Python2
 
 ### Application requirements
 
@@ -17,19 +17,12 @@ All requirements can also be installed using the command
 
 `pip install -r requirements.txt`
 
-## Installation
+## Installation and usage
 
-Either clone this repositry or install via
+### Method 1: running the application from the project directory
 
-```
-pip install git+https://github.com/softdevteam/mattermost-github-integration
-```
-
-## Usage
-
-### Method 1
-
-Within the `mattermostgithub` folder, copy `config.template` to `config.py` and edit it with your details. For example:
+1. Clone the repository
+2. Within the `mattermostgithub` directory, copy `config.template` to `config.py` and edit it with your details. For example:
 
 ```python
 USERNAME = "Github"
@@ -54,10 +47,22 @@ SERVER = {
 
 Start the server with `python server.py`.
 
-### Method 2
+### Method 2: installing the application with pip
 
-Download `config.template` and save it as `config.py` on your machine, changing
-your details as described above.
+1. Create a `virtualenv`:
+
+```
+virtualenv -p python3 env
+. env/bin/activate
+```
+
+1. Install with `pip`
+
+```
+pip install git+https://github.com/softdevteam/mattermost-github-integration
+```
+
+2. Download `config.template` and save it as `config.py` on your machine, changing your details as described above.
 
 The project can then be run as a flask application:
 
