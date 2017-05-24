@@ -1,11 +1,11 @@
 # Github integration for Mattermost
 
 Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermost-integration-gitlab) this program creates a server using [flask](https://github.com/mitsuhiko/flask) that listens for incoming GitHub event webhooks. These are then processed, formatted, and eventually forwarded to Mattermost where they are displayed inside a specified channel.
-![](preview.png)
+![](docs/preview.png)
 
 ## Requirements
 ### System requirements
-- Python2 or Python3
+- Python3 or Python2
 
 ### Application requirements
 
@@ -17,8 +17,12 @@ All requirements can also be installed using the command
 
 `pip install -r requirements.txt`
 
-## Usage
-Copy `config.template` to `config.py` and edit it with your details. For example:
+## Installation and usage
+
+### Method 1: running the application from the project directory
+
+1. Clone the repository
+2. Within the `mattermostgithub` directory, copy `config.template` to `config.py` and edit it with your details. For example:
 
 ```python
 USERNAME = "Github"
@@ -42,6 +46,31 @@ SERVER = {
 ```
 
 Start the server with `python server.py`.
+
+### Method 2: installing the application with pip
+
+1. Create a `virtualenv`:
+
+```
+virtualenv -p python3 env
+. env/bin/activate
+```
+
+2. Install with `pip`
+
+```
+pip install git+https://github.com/softdevteam/mattermost-github-integration
+```
+
+3. Download `config.template` and save it as `config.py` on your machine, changing your details as described above.
+
+The project can then be run as a flask application:
+
+```
+export FLASK_APP=mattermostgithub
+export MGI_CONFIG_FILE=path/to/config.py
+flask run
+```
 
 ### Webhooks
 GitHub messages can be delegated to different Mattermost hooks. The order is as
