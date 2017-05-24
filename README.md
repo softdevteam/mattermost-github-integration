@@ -56,13 +56,13 @@ virtualenv -p python3 env
 . env/bin/activate
 ```
 
-1. Install with `pip`
+2. Install with `pip`
 
 ```
 pip install git+https://github.com/softdevteam/mattermost-github-integration
 ```
 
-2. Download `config.template` and save it as `config.py` on your machine, changing your details as described above.
+3. Download `config.template` and save it as `config.py` on your machine, changing your details as described above.
 
 The project can then be run as a flask application:
 
