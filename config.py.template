@@ -13,7 +13,7 @@ MATTERMOST_WEBHOOK_URLS = {
 GITHUB_IGNORE_ACTIONS = {
     'issues': ['labeled']
 }
-SECRET = octoproxysecretvault
+SECRET = "octoproxysecretvault"
 SHOW_AVATARS = True
 SERVER = {
     'hook': '/octoproxy/webhook/',
