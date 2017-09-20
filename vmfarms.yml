@@ -1,0 +1,8 @@
+- commands:
+    - 'virtualenv-2.7 venv'
+    - './venv/bin/pip install -r requirements.txt'
+    - 'virtualenv-2.7 --relocatable venv'
+release_per_server:
+  - roles: ['mmgi']
+    commands:
+      - 'sudo supervisorctl restart all'

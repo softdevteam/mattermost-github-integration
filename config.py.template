@@ -1,0 +1,22 @@
+USERNAME = 'Github'
+ICON_URL = 'https://assets-cdn.github.com/images/modules/logos_page/Octocat.png'
+MATTERMOST_WEBHOOK_URLS = {
+    'vmfarms/ansible-roles' : ('https://chat.vmfarms.com/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/consul-config' : ('https://chat.vmfarms.com/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/deploy-ci' : ('https://chat.vmfarms.com/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/platform-migrations': ('https://chat.vmfarms.com/hooks/rzf7p5mchjfwinkwe644fhcx3r', 'platform-migrations'),
+    'vmfarms/vmfarms-cli' : ('https://chat.vmfarms.com/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/vmfarms-cli-admin' : ('https://chat.vmfarms.com/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/vmportal' : ('https://chat.vmfarms.com/hooks/zni79gme978ctj58rn5qo3ehnc', 'code'),
+    'vmfarms/management' : ('https://chat.vmfarms.com/hooks/pn6z3s7qh3r38qj1n3zknhj18c', 'management'),
+}
+GITHUB_IGNORE_ACTIONS = {
+    'issues': ['labeled']
+}
+SECRET = octoproxysecretvault
+SHOW_AVATARS = True
+SERVER = {
+    'hook': '/octoproxy/webhook/',
+    'address': '0.0.0.0',
+    'port': 5050,
+}
