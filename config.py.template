@@ -5,8 +5,8 @@ MATTERMOST_WEBHOOK_URLS = {
     'vmfarms/consul-config' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
     'vmfarms/deploy-ci' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
     'vmfarms/platform-migrations': ('https://replacemmgihost/hooks/rzf7p5mchjfwinkwe644fhcx3r', 'platform-migrations'),
-    'vmfarms/vmfarms-cli' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
-    'vmfarms/vmfarms-cli-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/farmer' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/farmer-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
     'vmfarms/vmportal' : ('https://replacemmgihost/hooks/zni79gme978ctj58rn5qo3ehnc', 'code'),
     'vmfarms/management' : ('https://replacemmgihost/hooks/pn6z3s7qh3r38qj1n3zknhj18c', 'management'),
 }
