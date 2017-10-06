@@ -1,12 +1,12 @@
 USERNAME = 'Github'
 ICON_URL = 'https://assets-cdn.github.com/images/modules/logos_page/Octocat.png'
 MATTERMOST_WEBHOOK_URLS = {
-    'vmfarms/ansible-roles' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
-    'vmfarms/consul-config' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
-    'vmfarms/deploy-ci' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/ansible-roles' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
+    'vmfarms/consul-config' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
+    'vmfarms/deploy-ci' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
     'vmfarms/platform-migrations': ('https://replacemmgihost/hooks/rzf7p5mchjfwinkwe644fhcx3r', 'platform-migrations'),
-    'vmfarms/farmer' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
-    'vmfarms/farmer-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'deployments-first'),
+    'vmfarms/farmer' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
+    'vmfarms/farmer-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
     'vmfarms/vmportal' : ('https://replacemmgihost/hooks/zni79gme978ctj58rn5qo3ehnc', 'code'),
     'vmfarms/management' : ('https://replacemmgihost/hooks/pn6z3s7qh3r38qj1n3zknhj18c', 'management'),
 }
