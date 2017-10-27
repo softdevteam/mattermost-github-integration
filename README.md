@@ -1,5 +1,8 @@
 # Github integration for Mattermost
 
+[![Build Status](https://secure.travis-ci.org/softdevteam/mattermost-github-integration.svg?branch=master)](https://secure.travis-ci.org/softdevteam/mattermost-github-integration?branch=master)
+[![Coverage](https://codecov.io/github/softdevteam/mattermost-github-integration/coverage.svg?branch=master)](https://codecov.io/github/softdevteam/mattermost-github-integration?branch=master)
+
 Inspired by [mattermost-integration-gitlab](https://github.com/NotSqrt/mattermost-integration-gitlab) this program creates a server using [flask](https://github.com/mitsuhiko/flask) that listens for incoming GitHub event webhooks. These are then processed, formatted, and eventually forwarded to Mattermost where they are displayed inside a specified channel.
 ![](docs/preview.png)
 

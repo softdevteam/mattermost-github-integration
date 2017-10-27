@@ -24,5 +24,4 @@ except ImportError:
             import imp
             config = imp.load_source(module_name, file_path)
 
-
-import mattermostgithub.server
+import mattermostgithub.server  # noqa
