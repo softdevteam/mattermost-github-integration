@@ -77,6 +77,11 @@ class PullRequest(Payload):
             action, self.number, self.title, self.url)
         return msg
 
+    def synchronize(self):
+        msg = """%s modified pull request [#%s %s](%s).""" % (self.user_link(),
+            self.number, self.title, self.url)
+        return msg
+
 class PullRequestComment(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)
