@@ -12,7 +12,7 @@ from mattermostgithub.payload import (
 
 from mattermostgithub import app
 
-SECRET = hmac.new(config.SECRET, digestmod=hashlib.sha1) if config.SECRET else None
+SECRET = hmac.new(config.SECRET.encode('utf8'), digestmod=hashlib.sha1) if config.SECRET else None
 
 @app.route(config.SERVER['hook'] or "/", methods=['POST'])
 def root():
