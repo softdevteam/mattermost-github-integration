@@ -10,3 +10,8 @@ SERVER = {
     'address': "0.0.0.0",
     'port': 5000,
 }
+
+# Ignore specified event actions
+GITHUB_IGNORE_ACTIONS = {
+    "create": ["tag"]
+}
