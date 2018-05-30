@@ -9,6 +9,7 @@ MATTERMOST_WEBHOOK_URLS = {
     'vmfarms/farmer-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/vmportal' : ('https://replacemmgihost/hooks/zni79gme978ctj58rn5qo3ehnc', 'code'),
     'vmfarms/management' : ('https://replacemmgihost/hooks/pn6z3s7qh3r38qj1n3zknhj18c', 'management'),
+    'vmfarms/documentation' : ('https://replacemmgihost/hooks/fpsy9k8dipbsmp93t6d85b33gw', 'documentation'),
     'vmfarms/sre' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/ops' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/support' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
@@ -16,6 +17,10 @@ MATTERMOST_WEBHOOK_URLS = {
     'vmfarms/statpage' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/zendesk-ticket' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/ansible-playbooks' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/mattermost-github-integration' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/factsheet' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/rpmbuild' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/homebrew-ops' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
 }
 GITHUB_IGNORE_ACTIONS = {
     'issues': ['labeled']
