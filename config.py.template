@@ -1,21 +1,21 @@
 USERNAME = 'Github'
 ICON_URL = 'https://assets-cdn.github.com/images/modules/logos_page/Octocat.png'
 MATTERMOST_WEBHOOK_URLS = {
-    'vmfarms/ansible-roles' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/consul-config' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/deploy-ci' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
+    'vmfarms/ansible-roles' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/consul-config' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/deploy-ci' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/platform-migrations': ('https://replacemmgihost/hooks/rzf7p5mchjfwinkwe644fhcx3r', 'platform-migrations'),
-    'vmfarms/farmer' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/farmer-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
+    'vmfarms/farmer' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/farmer-admin' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/vmportal' : ('https://replacemmgihost/hooks/zni79gme978ctj58rn5qo3ehnc', 'code'),
     'vmfarms/management' : ('https://replacemmgihost/hooks/pn6z3s7qh3r38qj1n3zknhj18c', 'management'),
-    'vmfarms/sre' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/ops' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/support' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/vmfarms-hubot' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/statpage' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/zendesk-ticket' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
-    'vmfarms/ansible-playbooks' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'platform-engineering'),
+    'vmfarms/sre' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/ops' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/support' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/vmfarms-hubot' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/statpage' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/zendesk-ticket' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/ansible-playbooks' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
 }
 GITHUB_IGNORE_ACTIONS = {
     'issues': ['labeled']
