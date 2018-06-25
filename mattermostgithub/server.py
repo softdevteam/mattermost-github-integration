@@ -86,8 +86,10 @@ def root():
 
             if hasattr(config, "GITHUB_IGNORE_ACTIONS") and \
                event in config.GITHUB_IGNORE_ACTIONS and \
-               (data['action'] in config.GITHUB_IGNORE_ACTIONS[event] \
-               or data['ref_type'] in config.GITHUB_IGNORE_ACTIONS[event]):
+               ((hasattr(data, "action") and \
+                data['action'] in config.GITHUB_IGNORE_ACTIONS[event]) \
+               or (hasattr(data, "ref_type") and \
+                   data['ref_type'] in config.GITHUB_IGNORE_ACTIONS[event])):
                 return "Notification action ignored (as per configuration)"
 
             post(msg, url, channel)
