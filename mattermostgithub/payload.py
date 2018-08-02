@@ -82,6 +82,20 @@ class PullRequest(Payload):
             self.number, self.title, self.url)
         return msg
 
+class PullRequestReview(Payload):
+    def __init__(self, data):
+        Payload.__init__(self, data)
+        self.number = self.data['pull_request']['number']
+        self.title  = self.data['pull_request']['title']
+        self.body   = self.data['review']['body']
+        self.url    = self.data['review']['html_url']
+
+    def submitted(self):
+        body = self.preview(self.body)
+        msg = """%s submitted a review on pull request [#%s %s](%s):
+> %s""" % (self.user_link(), self.number, self.title, self.url, body)
+        return msg
+
 class PullRequestComment(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)

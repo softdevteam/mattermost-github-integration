@@ -6,7 +6,7 @@ from flask import request
 
 from mattermostgithub import config
 from mattermostgithub.payload import (
-    PullRequest, PullRequestComment, Issue, IssueComment,
+    PullRequest, PullRequestReview, PullRequestComment, Issue, IssueComment,
     Repository, Branch, Push, Tag, CommitComment, Wiki, Status
 )
 
@@ -66,6 +66,9 @@ def root():
     elif event == "delete":
         if data['ref_type'] == "branch":
             msg = Branch(data).deleted()
+    elif event == "pull_request_review":
+        if data['action'] == "submitted":
+            msg = PullRequestReview(data).submitted()
     elif event == "pull_request_review_comment":
         if data['action'] == "created":
             msg = PullRequestComment(data).created()
