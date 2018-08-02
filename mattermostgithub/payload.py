@@ -234,3 +234,12 @@ class Wiki(Payload):
             msg.append(ctext)
         return "".join(msg)
 
+class Status(Payload):
+    def __init__(self, data):
+        Payload.__init__(self, data)
+
+    def updated(self):
+        url = self.data["target_url"]
+        description = self.data["description"]
+        msg = "[%s](%s) in %s." % (description, url, self.repo_link())
+        return msg
