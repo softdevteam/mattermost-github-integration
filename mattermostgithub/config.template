@@ -1,9 +1,19 @@
 USERNAME = "Github"
 ICON_URL = ""
+
+# Repository settings
 MATTERMOST_WEBHOOK_URLS = {
     'default' : ("yourdomain.org/hooks/hookid", "off-topic"),
 }
+
+# Ignore specified event actions
 GITHUB_IGNORE_ACTIONS = {
+    "pull_request": ["synchronize"]
+}
+
+# Redirect events to different channels
+REDIRECT_EVENTS = {
+    "push": "commits"
 }
 SECRET = ""
 SHOW_AVATARS = True

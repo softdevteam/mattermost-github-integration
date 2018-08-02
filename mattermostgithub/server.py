@@ -92,6 +92,10 @@ def root():
                data['action'] in config.GITHUB_IGNORE_ACTIONS[event]:
                 return "Notification action ignored (as per configuration)"
 
+            if hasattr(config, "REDIRECT_EVENTS") and \
+                    event in config.REDIRECT_EVENTS:
+                channel = config.REDIRECT_EVENTS[event]
+
             post(msg, url, channel)
             return "Notification successfully posted to Mattermost"
         else:
