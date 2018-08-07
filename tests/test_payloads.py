@@ -12,7 +12,7 @@ from tests import config
 
 from mattermostgithub import server
 server.post = dummy
-server.config = config
+server.config = config # use testing config instead
 
 @pytest.mark.usefixtures('live_server')
 class TestLiveServer:

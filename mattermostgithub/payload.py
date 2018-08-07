@@ -1,8 +1,8 @@
 from io import BytesIO
 import requests
-from mattermostgithub.config import SHOW_AVATARS
 try:
     from PIL import Image
+    from mattermostgithub.config import SHOW_AVATARS
 except ImportError:
     SHOW_AVATARS = False
 

@@ -4,7 +4,12 @@ import hashlib
 import requests
 from flask import request
 
-from mattermostgithub import config
+try:
+    from mattermostgithub import config
+except ImportError:
+    print("Could not import config. Using test-config instead.")
+    from tests import config
+
 from mattermostgithub.payload import (
     PullRequest, PullRequestReview, PullRequestComment, Issue, IssueComment,
     Repository, Branch, Push, Tag, CommitComment, Wiki, Status
