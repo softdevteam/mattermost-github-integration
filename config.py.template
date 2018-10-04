@@ -21,6 +21,7 @@ MATTERMOST_WEBHOOK_URLS = {
     'vmfarms/factsheet' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/rpmbuild' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
     'vmfarms/homebrew-ops' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
+    'vmfarms/vault' : ('https://replacemmgihost/hooks/w1mucqqseffszxhntbwce6dt3r', 'sprints'),
 }
 GITHUB_IGNORE_ACTIONS = {
     'issues': ['labeled']
