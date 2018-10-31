@@ -103,6 +103,9 @@ def root():
                    data['ref_type'] in config.GITHUB_IGNORE_ACTIONS[event])):
                 return "Notification action ignored (as per configuration)"
 
+            if hasattr(config, "IGNORE_USERS") and data.has_key('sender') and data['sender']['login'] in config.IGNORE_USERS:
+                return "User blocked from generating notifications"
+
             if hasattr(config, "REDIRECT_EVENTS") and \
                     event in config.REDIRECT_EVENTS:
                 channel = config.REDIRECT_EVENTS[event]
