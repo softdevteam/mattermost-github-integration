@@ -95,16 +95,22 @@ def root():
         if hook_info:
             url, channel = get_hook_info(data)
 
-            if hasattr(config, "GITHUB_IGNORE_ACTIONS") and \
-               event in config.GITHUB_IGNORE_ACTIONS and \
-               ((hasattr(data, "action") and \
-                data['action'] in config.GITHUB_IGNORE_ACTIONS[event]) \
-               or (hasattr(data, "ref_type") and \
-                   data['ref_type'] in config.GITHUB_IGNORE_ACTIONS[event])):
-                return "Notification action ignored (as per configuration)"
+            action = None
+            if data.has_key("action"):
+                action = data["action"]
+            elif data.has_key("ref_type"):
+                action = data["ref_type"]
 
-            if hasattr(config, "IGNORE_USERS") and data.has_key('sender') and data['sender']['login'] in config.IGNORE_USERS:
-                return "User blocked from generating notifications"
+            if action:
+                if hasattr(config, "GITHUB_IGNORE_ACTIONS") and \
+                   event in config.GITHUB_IGNORE_ACTIONS and \
+                   action in config.GITHUB_IGNORE_ACTIONS[event]:
+                    return "Notification action ignored (as per configuration)"
+
+            if hasattr(config, "IGNORE_USER_EVENTS") and data.has_key('sender') \
+               and data['sender']['login'] in config.IGNORE_USER_EVENTS \
+               and event in config.IGNORE_USER_EVENTS[data['sender']['login']]:
+                return "User blocked from generating this notifications"
 
             if hasattr(config, "REDIRECT_EVENTS") and \
                     event in config.REDIRECT_EVENTS:

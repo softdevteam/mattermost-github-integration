@@ -11,8 +11,11 @@ GITHUB_IGNORE_ACTIONS = {
     "pull_request": ["synchronize"]
 }
 
-# Ignore users
-IGNORE_USERS = ["someuser", "anotheruser"]
+# Ignore events from specified users
+IGNORE_USERS = {
+    "someuser": ["push"],
+    "anotheruser": ["push", "create"]
+}
 
 # Redirect events to different channels
 REDIRECT_EVENTS = {
