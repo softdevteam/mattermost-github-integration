@@ -96,9 +96,9 @@ def root():
             url, channel = get_hook_info(data)
 
             action = None
-            if data.has_key("action"):
+            if "action" in data:
                 action = data["action"]
-            elif data.has_key("ref_type"):
+            elif "ref_type" in data:
                 action = data["ref_type"]
 
             if action:
@@ -107,7 +107,7 @@ def root():
                    action in config.GITHUB_IGNORE_ACTIONS[event]:
                     return "Notification action ignored (as per configuration)"
 
-            if hasattr(config, "IGNORE_USER_EVENTS") and data.has_key('sender') \
+            if hasattr(config, "IGNORE_USER_EVENTS") and "sender" in data \
                and data['sender']['login'] in config.IGNORE_USER_EVENTS \
                and event in config.IGNORE_USER_EVENTS[data['sender']['login']]:
                 return "User blocked from generating this notifications"
