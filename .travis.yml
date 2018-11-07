@@ -7,7 +7,7 @@ python:
 install:
   - pip install Flask
   - pip install requests
-  - pip install pytest
+  - pip install "pytest>=3.6"
   - pip install pytest-flask
 # command to run tests
 script: pytest
