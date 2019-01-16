@@ -99,7 +99,7 @@ For example, if `SERVER['hook']` is `/hooks/github`, your Github webhooks
 would be `http://yourdomain.org/hooks/github`.
 
 ### Secret
-If you don't want to use a secret set the field to `None`.
+The secret key that can be set when setting up the Github webhook. If you don't want to use a secret, set the field to `None`.
 
 ## Deploying with Docker
 
