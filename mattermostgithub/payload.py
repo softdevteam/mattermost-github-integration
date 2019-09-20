@@ -99,8 +99,6 @@ class PullRequestReview(Payload):
 
     def submitted(self):
         body = self.preview(self.body)
-        if not body:
-            return
         msg = """%s submitted a review on pull request [#%s %s](%s):
 > %s""" % (self.user_link(), self.number, self.title, self.url, body)
         return msg
