@@ -48,6 +48,8 @@ def root():
             msg = PullRequest(data).assigned()
         elif data['action'] == "synchronize":
             msg = PullRequest(data).synchronize()
+        elif data['action'] == "review_requested":
+            msg = PullRequest(data).review_requested()
     elif event == "issues":
         if data['action'] == "opened":
             msg = Issue(data).opened()

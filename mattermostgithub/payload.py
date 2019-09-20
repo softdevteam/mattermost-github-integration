@@ -82,6 +82,13 @@ class PullRequest(Payload):
             self.number, self.title, self.url)
         return msg
 
+    def review_requested(self):
+        reviewers = ", ".join(self.data["requested_reviewers"])
+        msg = """%s requested a review from %s on [#%s %s](%s)""" % (self.user_link(),
+            reviewers,
+            self.number, self.title, self.url)
+        return msg
+
 class PullRequestReview(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)
@@ -92,6 +99,8 @@ class PullRequestReview(Payload):
 
     def submitted(self):
         body = self.preview(self.body)
+        if not body:
+            return
         msg = """%s submitted a review on pull request [#%s %s](%s):
 > %s""" % (self.user_link(), self.number, self.title, self.url, body)
         return msg
