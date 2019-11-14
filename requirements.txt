@@ -6,7 +6,7 @@ Jinja2>=2.10.1
 MarkupSafe==1.0
 olefile==0.44
 packaging==16.8
-Pillow==4.1.1
+Pillow==6.2.0
 pyparsing==2.2.0
 requests==2.20.0
 six==1.10.0
