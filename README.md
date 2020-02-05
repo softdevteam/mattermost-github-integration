@@ -19,8 +19,6 @@ All requirements can also be installed using the command
 
 ## Installation and usage
 
-### Method 1: running the application from the project directory
-
 1. Clone the repository
 2. Within the `mattermostgithub` directory, copy `config.template` to `config.py` and edit it with your details. For example:
 
@@ -45,32 +43,15 @@ SERVER = {
 }
 ```
 
-Start the server with `python server.py`.
-
-### Method 2: installing the application with pip
-
-1. Create a `virtualenv`:
-
+Test the server with `python server.py`. For deployment, please consider using
+WSGI (more details
+[here](https://flask.palletsprojects.com/en/1.0.x/deploying/wsgi-standalone/)).
+For example to run using Gunicorn, execute:
 ```
-virtualenv -p python3 env
-. env/bin/activate
+gunicorn -b 0.0.0.0:5000 mattermostgithub:app
 ```
 
-2. Install with `pip`
-
-```
-pip install git+https://github.com/softdevteam/mattermost-github-integration
-```
-
-3. Download `config.template` and save it as `config.py` on your machine, changing your details as described above.
-
-The project can then be run as a flask application:
-
-```
-export FLASK_APP=mattermostgithub
-export MGI_CONFIG_FILE=path/to/config.py
-flask run
-```
+Alternatively, a `Dockerfile` is provided to run using Docker (see below).
 
 ### Webhooks
 GitHub messages can be delegated to different Mattermost hooks. The order is as
