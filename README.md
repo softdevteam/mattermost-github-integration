@@ -43,7 +43,15 @@ SERVER = {
 }
 ```
 
-Start the server with `python server.py`.
+Test the server with `python server.py`. For deployment, please consider using
+WSGI (more details
+[here](https://flask.palletsprojects.com/en/1.0.x/deploying/wsgi-standalone/)).
+For example to run using Gunicorn, execute:
+```
+gunicorn -b 0.0.0.0:5000 mattermostgithub:app
+```
+
+Alternatively, a `Dockerfile` is provided to run using Docker (see below).
 
 ### Webhooks
 GitHub messages can be delegated to different Mattermost hooks. The order is as
