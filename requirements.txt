@@ -2,7 +2,7 @@ appdirs==1.4
 click==7.0
 flask==1.1
 itsdangerous==1.1
-Jinja2==2.11
+Jinja2==2.11.3
 MarkupSafe==1.1
 olefile==0.46
 packaging==20.1
