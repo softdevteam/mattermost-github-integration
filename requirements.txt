@@ -10,4 +10,4 @@ Pillow==9.3.0
 pyparsing==2.4
 requests==2.22
 six==1.14
-Werkzeug==2.2.3
+Werkzeug==3.0.1
