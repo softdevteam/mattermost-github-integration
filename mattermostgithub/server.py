@@ -50,6 +50,10 @@ def root():
             msg = PullRequest(data).synchronize()
         elif data['action'] == "review_requested":
             msg = PullRequest(data).review_requested()
+        elif data['action'] == "enqueued":
+            msg = PullRequest(data).pr_enqueued()
+        elif data['action'] == "dequeued":
+            msg = PullRequest(data).pr_dequeued()
     elif event == "issues":
         if data['action'] == "opened":
             msg = Issue(data).opened()
