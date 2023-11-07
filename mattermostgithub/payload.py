@@ -39,7 +39,9 @@ class Payload(object):
         if not text:
             return text
         l = text.split("\n")
-        result = l[0]
+        # Show the first 4 lines of a message.
+        result = "".join(l[:4])
+        # Remove trailing newlines.
         if result[-1] in "[\n, \r]":
             result = result[:-1]
         if result != text:
@@ -99,6 +101,9 @@ class PullRequestReview(Payload):
 
     def submitted(self):
         body = self.preview(self.body)
+        if body is None:
+            # Ignore empty PR reviews
+            return ""
         msg = """%s submitted a review on pull request [#%s %s](%s):
 > %s""" % (self.user_link(), self.number, self.title, self.url, body)
         return msg
