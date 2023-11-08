@@ -89,6 +89,17 @@ class PullRequest(Payload):
             self.number, self.title, self.url)
         return msg
 
+    def pr_enqueued(self):
+        msg = """[#%s %s](%s) added to merge queue.""" % (
+            self.number, self.title, self.url)
+        return msg
+
+    def pr_dequeued(self):
+        reason = self.data["reason"]
+        msg = """[#%s %s](%s) removed from merge queue. Reason: %s""" % (
+            self.number, self.title, self.url, reason)
+        return msg
+
 class PullRequestReview(Payload):
     def __init__(self, data):
         Payload.__init__(self, data)
