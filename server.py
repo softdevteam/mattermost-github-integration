@@ -4,7 +4,7 @@ try:
 except ImportError:
     from mattermostgithub import config
 app.run(
-    host=config.SERVER['address'] or "0.0.0.0",
+    host=config.SERVER['address'] or "127.0.0.1",
     port=config.SERVER['port'] or 5000,
     debug=False
 )

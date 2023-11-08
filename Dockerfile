@@ -1,4 +1,4 @@
-FROM jfloff/alpine-python:latest
+FROM python:3-alpine
 
 RUN apk add --update jpeg-dev zlib-dev
 
